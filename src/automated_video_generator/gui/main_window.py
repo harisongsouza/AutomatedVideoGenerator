@@ -139,15 +139,13 @@ class MainWindow(QMainWindow):
         self.template_screen = TemplateSelectionScreen()
         self.file_loader_screen = FileLoaderScreen()
 
-        # Tela B (para "Create a video about topics") - NOVA TELA
-        self.topic_screen = QWidget()  # Substitua pela sua classe real, ex: TopicScreen()
-        self.topic_screen.setStyleSheet("background-color: lightblue;")  # Só para diferenciar visualmente agora
+        self.topic_screen = QWidget()
+        self.topic_screen.setStyleSheet("background-color: lightblue;")
 
-        # adiciona ao stackedWidget (a ordem importa para o índice, mas usaremos referências)
         self.stacked_widget.addWidget(self.home_screen)
         self.stacked_widget.addWidget(self.template_screen)
         self.stacked_widget.addWidget(self.file_loader_screen)
-        self.stacked_widget.addWidget(self.topic_screen)  # Index 3
+        self.stacked_widget.addWidget(self.topic_screen)
 
         self.home_screen.start_requested.connect(self.mostrar_tela_templates)
 
@@ -164,18 +162,14 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentWidget(self.template_screen)
 
     def mostrar_tela_carregador(self, template_escolhido):
-        # aqui você pode salvar qual template foi escolhido se precisar usar depois
         print(f"Template escolhido: {template_escolhido}")
         self.stacked_widget.setCurrentWidget(self.file_loader_screen)
 
     def rotear_escolha_template(self, template_type):
-        print(f"Template escolhido: {template_type}")  # Debug para confirmar
+        print(f"Template escolhido: {template_type}")
 
         if template_type == "camadas_1":
-            # Se for o vídeo de camadas, vai para a tela de carregar arquivo
             self.stacked_widget.setCurrentWidget(self.file_loader_screen)
 
         elif template_type == "camadas_2":
-            # Se for o vídeo de tópicos, vai para a NOVA tela específica
-            # Certifique-se de ter adicionado essa tela ao stacked_widget antes
             self.stacked_widget.setCurrentWidget(self.topic_screen)
