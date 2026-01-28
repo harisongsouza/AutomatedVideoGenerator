@@ -1,23 +1,10 @@
 
-
-import sys
-import re
-import os
-import shutil
-from PySide6.QtCore import Signal, Qt, QObject, QThread
+from PySide6.QtCore import Signal, Qt
 from PySide6.QtWidgets import (
-    QApplication,
-    QMainWindow,
     QPushButton,
     QVBoxLayout,
-    QHBoxLayout,
     QWidget,
-    QFileDialog,
-    QLabel,
-    QMessageBox,
-    QStackedWidget,
-    QProgressBar,
-    QDialog
+    QLabel
 )
 from PySide6.QtGui import QFont
 

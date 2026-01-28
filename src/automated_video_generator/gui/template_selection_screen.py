@@ -1,18 +1,11 @@
 
-from PySide6.QtCore import Signal, Qt, QObject, QThread
+from PySide6.QtCore import Signal, Qt
 from PySide6.QtWidgets import (
-    QApplication,
-    QMainWindow,
     QPushButton,
     QVBoxLayout,
     QHBoxLayout,
     QWidget,
-    QFileDialog,
-    QLabel,
-    QMessageBox,
-    QStackedWidget,
-    QProgressBar,
-    QDialog
+    QLabel
 )
 from PySide6.QtGui import QFont
 
@@ -38,12 +31,12 @@ class TemplateSelectionScreen(QWidget):
         self.btn_template1 = QPushButton("Create a video in layers")
         self.btn_template1.setObjectName("TemplateCard")
         self.btn_template1.setCursor(Qt.PointingHandCursor)
-        self.btn_template1.clicked.connect(lambda: self.template_selected.emit("camadas_1"))
+        self.btn_template1.clicked.connect(lambda: self.template_selected.emit("camadas"))
 
         self.btn_template2 = QPushButton("Create a video in topics")
         self.btn_template2.setObjectName("TemplateCard")
         self.btn_template2.setCursor(Qt.PointingHandCursor)
-        self.btn_template2.clicked.connect(lambda: self.template_selected.emit("camadas_2"))
+        self.btn_template2.clicked.connect(lambda: self.template_selected.emit("topicos"))
 
         cards_layout.addStretch()
         cards_layout.addWidget(self.btn_template1)

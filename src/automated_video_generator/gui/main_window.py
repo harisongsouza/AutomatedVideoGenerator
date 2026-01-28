@@ -1,17 +1,15 @@
 """Main module."""
 
-import re
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import (
     QMainWindow,
-    QWidget,
     QStackedWidget
 )
 
 from automated_video_generator.gui.file_loader_screen import FileLoaderScreen
 from automated_video_generator.gui.home_screen import HomeScreen
 from automated_video_generator.gui.template_selection_screen import TemplateSelectionScreen
-
+"""
 try:
     from criar_audio import main as criar_audio
     from transcricao_audio import main as transcricao_audio
@@ -29,11 +27,11 @@ try:
     from cortes_audio import main as cortes_audio
 except ImportError as e:
     print(f"ERRO DE IMPORTAÇÃO: {e}")
-    print("Certifique-se que todos os arquivos de processamento (.py) estão na mesma pasta.")
+    print("Certifique-se que todos os arquivos de processamento (.py) estão na mesma pasta.") """
 
 # Mock functions para permitir que a UI rode sem os arquivos de backend
 # USAR SE QUISER TESTAR SOMENTE A PARTE GRAFICA SEM GERAR NADA
-""" def criar_audio(): print("Executando: criar_audio")
+def criar_audio(): print("Executando: criar_audio")
 def cortes_audio(): print("Executando: cortes_audio")
 def transcricao_audio(): print("Executando: transcricao_audio")
 def pegar_camadas(): print("Executando: pegar_camadas")
@@ -44,7 +42,7 @@ def get_frase_imagem_intervalo(): print("Executando: get_frase_imagem_intervalo"
 def get_sentido_frase_imagens(tema): print(f"Executando: get_sentido_frase_imagens com tema: {tema}")
 def pegar_imagens(): print("Executando: pegar_imagens")
 def processamento_de_imagem(): print("Executando: processamento_de_imagem")
-def criar_video_ffmpeg(): print("Executando: criar_video_ffmpeg") """
+def criar_video_ffmpeg(): print("Executando: criar_video_ffmpeg")
 
 
 
@@ -93,39 +91,6 @@ class Worker(QObject):
             error_details = f"Ocorreu uma exceção não tratada:\n\n{type(e).__name__}: {e}"
             self.error.emit(error_title, error_details)
 
-
-
-def validar_formato_iceberg(conteudo: str) -> tuple[bool, str]:
-    camadas_obrigatorias = ['Camada Superfície Brilhante', 'Camada Congelada', 'Camada Submersa',
-                            'Camada Gelo Profundo', 'Camada Núcleo Abissal', 'Espero que tenham gostado.']
-    posicao_anterior = -1
-    posicoes_camadas = {}
-    for camada in camadas_obrigatorias:
-        posicao_atual = conteudo.find(camada)
-        if posicao_atual == -1: return False, f"Erro: A seção obrigatória '{camada}' não foi encontrada."
-        if posicao_atual < posicao_anterior: return False, f"Erro: A seção '{camada}' está fora da ordem esperada."
-        posicao_anterior = posicao_atual
-        posicoes_camadas[camada] = posicao_atual
-    if posicoes_camadas['Camada Superfície Brilhante'] == 0: return False, "Erro: Falta o texto de introdução."
-    for i in range(len(camadas_obrigatorias) - 2):
-        camada_atual, camada_seguinte = camadas_obrigatorias[i], camadas_obrigatorias[i + 1]
-        inicio_secao = posicoes_camadas[camada_atual] + len(camada_atual)
-        fim_secao = posicoes_camadas[camada_seguinte]
-        secao_texto = conteudo[inicio_secao:fim_secao]
-        topicos_encontrados = re.findall(r'Número (\d)\.', secao_texto)
-        if not (1 <= len(
-            topicos_encontrados) <= 3): return False, f"Erro na '{camada_atual}': É necessário ter entre 1 e 3 tópicos. Encontrados: {len(topicos_encontrados)}."
-        numeros_topicos = [int(n) for n in topicos_encontrados]
-        if numeros_topicos != list(range(1,
-                                         len(numeros_topicos) + 1)): return False, f"Erro na '{camada_atual}': Os tópicos não estão em ordem sequencial."
-    posicao_final_esperada = posicoes_camadas['Espero que tenham gostado.'] + len('Espero que tenham gostado.')
-    if len(conteudo.strip()) <= posicao_final_esperada: return False, "Erro: Falta o texto de encerramento."
-    return True, "Sucesso! \nO arquivo está no formato correto."
-
-
-
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -139,19 +104,15 @@ class MainWindow(QMainWindow):
         self.template_screen = TemplateSelectionScreen()
         self.file_loader_screen = FileLoaderScreen()
 
-        self.topic_screen = QWidget()
-        self.topic_screen.setStyleSheet("background-color: lightblue;")
-
         self.stacked_widget.addWidget(self.home_screen)
         self.stacked_widget.addWidget(self.template_screen)
         self.stacked_widget.addWidget(self.file_loader_screen)
-        self.stacked_widget.addWidget(self.topic_screen)
 
         self.home_screen.start_requested.connect(self.mostrar_tela_templates)
 
         self.template_screen.back_requested.connect(self.mostrar_tela_inicial)
 
-        self.template_screen.template_selected.connect(self.rotear_escolha_template)
+        self.template_screen.template_selected.connect(self.mostrar_tela_carregador)
 
         self.file_loader_screen.back_requested.connect(self.mostrar_tela_templates)
 
@@ -163,13 +124,7 @@ class MainWindow(QMainWindow):
 
     def mostrar_tela_carregador(self, template_escolhido):
         print(f"Template escolhido: {template_escolhido}")
+
+        self.file_loader_screen.set_template(template_escolhido)
+
         self.stacked_widget.setCurrentWidget(self.file_loader_screen)
-
-    def rotear_escolha_template(self, template_type):
-        print(f"Template escolhido: {template_type}")
-
-        if template_type == "camadas_1":
-            self.stacked_widget.setCurrentWidget(self.file_loader_screen)
-
-        elif template_type == "camadas_2":
-            self.stacked_widget.setCurrentWidget(self.topic_screen)
