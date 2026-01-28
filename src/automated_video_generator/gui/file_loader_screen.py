@@ -107,7 +107,7 @@ class FileLoaderScreen(QWidget):
             if self.valid_filepath:
                 tema_do_video = "imagens sobre "
                 progress_dialog = ProgressWindow(self)
-                progress_dialog.start_processing(self.valid_filepath, tema_do_video)
+                progress_dialog.start_layer_video_processing(self.valid_filepath, tema_do_video)
         elif self.template_escolhido == "topicos":
             abc = 0
             #DESENVOLVER VALIDAÇÃO DE INICIAR PROCESSO TOPICOS

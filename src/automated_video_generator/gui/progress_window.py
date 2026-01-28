@@ -8,32 +8,35 @@ from PySide6.QtWidgets import (
     QDialog
 )
 
+from automated_video_generator.workers.video_worker import Worker
+
+
 class ProgressWindow(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Processando Vídeo");
-        self.setModal(True);
-        self.resize(450, 150);
+        self.setWindowTitle("Processando Vídeo")
+        self.setModal(True)
+        self.resize(450, 150)
         self.setWindowFlag(Qt.WindowCloseButtonHint, False)
-        self.progressBar = QProgressBar();
-        self.progressBar.setTextVisible(True);
+        self.progressBar = QProgressBar()
+        self.progressBar.setTextVisible(True)
         self.progressBar.setRange(0, 100)
-        self.statusLabel = QLabel("Iniciando processamento...");
+        self.statusLabel = QLabel("Iniciando processamento...")
         self.statusLabel.setAlignment(Qt.AlignCenter)
-        layout = QVBoxLayout(self);
-        layout.addWidget(self.statusLabel);
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.statusLabel)
         layout.addWidget(self.progressBar)
 
-    def start_processing(self, filepath, tema):
-        self.thread = QThread();
-        self.worker = Worker(filepath, tema);
+    def start_layer_video_processing(self, filepath, tema):
+        self.thread = QThread()
+        self.worker = Worker(filepath, tema)
         self.worker.moveToThread(self.thread)
-        self.thread.started.connect(self.worker.run);
-        self.worker.finished.connect(self.on_finished);
-        self.worker.error.connect(self.on_error);
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.on_finished)
+        self.worker.error.connect(self.on_error)
         self.worker.progress.connect(self.update_progress)
-        self.worker.finished.connect(self.thread.quit);
-        self.worker.finished.connect(self.worker.deleteLater);
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
         self.thread.start()
         self.exec()
