@@ -27,9 +27,23 @@ class ProgressWindow(QDialog):
         layout.addWidget(self.statusLabel)
         layout.addWidget(self.progressBar)
 
-    def start_layer_video_processing(self, filepath, tema):
+    def start_layer_video_processing(self, filepath, tema, template_escolhido):
         self.thread = QThread()
-        self.worker = Worker(filepath, tema)
+        self.worker = Worker(filepath, tema, template_escolhido)
+        self.worker.moveToThread(self.thread)
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.on_finished)
+        self.worker.error.connect(self.on_error)
+        self.worker.progress.connect(self.update_progress)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+        self.thread.start()
+        self.exec()
+
+    def start_topics_video_processing(self, filepath, tema, template_escolhido):
+        self.thread = QThread()
+        self.worker = Worker(filepath, tema, template_escolhido)
         self.worker.moveToThread(self.thread)
         self.thread.started.connect(self.worker.run)
         self.worker.finished.connect(self.on_finished)
