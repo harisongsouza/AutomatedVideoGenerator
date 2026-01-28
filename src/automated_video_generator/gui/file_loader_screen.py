@@ -61,7 +61,7 @@ class FileLoaderScreen(QWidget):
 
     def abrir_e_validar_arquivo(self):
         if self.template_escolhido == "camadas":
-            print(f"Template escolhido: CAMADAS")
+            print(f"Validar Arquivo de: CAMADAS")
             self.botao_proximo.setEnabled(False);
             self.botao_proximo.setCursor(Qt.ArrowCursor);
             self.valid_filepath = None
@@ -98,7 +98,7 @@ class FileLoaderScreen(QWidget):
                 except Exception as e:
                     QMessageBox.critical(self, "Erro de Leitura", f"Não foi possível ler o arquivo:\n{e}")
         elif self.template_escolhido == "topicos":
-            print(f"Template escolhido: TOPICOS")
+            print(f"Validar Arquivo de: TOPICOS")
             self.botao_proximo.setEnabled(False)
             self.botao_proximo.setCursor(Qt.ArrowCursor)
             self.valid_filepath = None
