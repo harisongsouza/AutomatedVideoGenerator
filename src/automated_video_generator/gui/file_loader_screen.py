@@ -74,7 +74,7 @@ class FileLoaderScreen(QWidget):
                         conteudo = f.read()
                     sucesso, mensagem = validar_arquivos_formato_camadas(conteudo)
                     if sucesso:
-
+                        #pega arquivo .txt com qualquer nome do usuario, e muda/copia? o nome do arquivo para roteiro.txt para o software proccessar e funcionar
                         try:
                             os.makedirs(DESTINATION_DIR, exist_ok=True)
 

@@ -1,25 +1,13 @@
 from PySide6.QtCore import Signal, QObject
 
-"""
 try:
-    from criar_audio import main as criar_audio
-    from transcricao_audio import main as transcricao_audio
-    from pegar_camadas import main as pegar_camadas
-    from pegar_topicos import main as pegar_topicos
-    from pegar_intervalos import main as pegar_intervalos
-    from imagens_em_intervalos_topicos import main as imagens_em_intervalos_topicos
-    from get_frase_imagem_intervalo import main as get_frase_imagem_intervalo
-    from get_sentido_frase_imagens import main as get_sentido_frase_imagens
-    from pegar_imagens import main as pegar_imagens
-    from processamento_de_imagem import main as processamento_de_imagem
-    from processamento_de_imagem_shorts import main as processamento_de_imagem_shorts
-    from criar_video_shorts import main as criar_video_shorts
-    from criar_video_ffmpeg import main as criar_video_ffmpeg
-    from cortes_audio import main as cortes_audio
+    from automated_video_generator.service.layers_video import *
+    from automated_video_generator.service.topics_video import *
 except ImportError as e:
     print(f"ERRO DE IMPORTAÇÃO: {e}")
-    print("Certifique-se que todos os arquivos de processamento (.py) estão na mesma pasta.") """
+    print("Certifique-se que todos os arquivos de processamento (.py) estão na mesma pasta.")
 
+"""
 # Mock functions para permitir que a UI rode sem os arquivos de backend
 # USAR SE QUISER TESTAR SOMENTE A PARTE GRAFICA SEM GERAR NADA
 def criar_audio(): print("Executando: criar_audio")
@@ -33,7 +21,7 @@ def get_frase_imagem_intervalo(): print("Executando: get_frase_imagem_intervalo"
 def get_sentido_frase_imagens(tema): print(f"Executando: get_sentido_frase_imagens com tema: {tema}")
 def pegar_imagens(): print("Executando: pegar_imagens")
 def processamento_de_imagem(): print("Executando: processamento_de_imagem")
-def criar_video_ffmpeg(): print("Executando: criar_video_ffmpeg")
+def criar_video_ffmpeg(): print("Executando: criar_video_ffmpeg") """
 
 class Worker(QObject):
     progress = Signal(int, str)
@@ -50,19 +38,19 @@ class Worker(QObject):
         if self.template_escolhido == "camadas":
             print(f"Executando scripts de: CAMADAS")
             tarefas = [
-                (criar_audio, "CRIANDO AUDIO..."),
-                (cortes_audio, "CRIANDO TRANSCRICAO..."),
-                (transcricao_audio, "CRIANDO TRANSCRICAO WORDS..."),
-                (pegar_camadas, "PEGANDO CAMADAS..."),
-                (pegar_topicos, "PEGANDO TOPICOS..."),
-                (pegar_intervalos, "PEGANDO INTERVALOS..."),
-                (imagens_em_intervalos_topicos, "MONTANDO JSON IMAGENS DOS INTERVALOS..."),
-                (get_frase_imagem_intervalo, "MONTANDO JSON INTERVALO DE CADA IMAGENS..."),
-                (lambda: get_sentido_frase_imagens(self.tema), "MONTANDO A FRASE DE BUSCA DE CADA IMAGEM..."),
+                (criar_audio_ly, "CRIANDO AUDIO..."),
+                (cortes_audio_ly, "CRIANDO TRANSCRICAO..."),
+                (transcricao_audio_ly, "CRIANDO TRANSCRICAO WORDS..."),
+                (pegar_camadas_ly, "PEGANDO CAMADAS..."),
+                (pegar_topicos_ly, "PEGANDO TOPICOS..."),
+                (pegar_intervalos_ly, "PEGANDO INTERVALOS..."),
+                (imagens_em_intervalos_topicos_ly, "MONTANDO JSON IMAGENS DOS INTERVALOS..."),
+                (get_frase_imagem_intervalo_ly, "MONTANDO JSON INTERVALO DE CADA IMAGENS..."),
+                (lambda: get_sentido_frase_imagens_ly(self.tema), "MONTANDO A FRASE DE BUSCA DE CADA IMAGEM..."),
 
-                (pegar_imagens, "PEGANDO IMAGENS DA INTERNET..."),
-                (processamento_de_imagem, "PROCESSANDO IMAGENS..."),
-                (criar_video_ffmpeg, "CRIANDO VIDEO FINAL..."),
+                (pegar_imagens_ly, "PEGANDO IMAGENS DA INTERNET..."),
+                (processamento_de_imagem_ly, "PROCESSANDO IMAGENS..."),
+                (criar_video_ffmpeg_ly, "CRIANDO VIDEO FINAL..."),
 
                 # (processamento_de_imagem_shorts, "PROCESSANDO IMAGENS PARA O SHORTS..."),
                 # (criar_video_shorts, "CRIANDO VIDEO SHORTS..."),
@@ -84,19 +72,19 @@ class Worker(QObject):
         elif self.template_escolhido == "topicos":
             print(f"Executando scripts de: TOPICOS")
             tarefas = [
-                (criar_audio, "CRIANDO AUDIO..."),
-                (cortes_audio, "CRIANDO TRANSCRICAO..."),
-                (transcricao_audio, "CRIANDO TRANSCRICAO WORDS..."),
-                (pegar_camadas, "PEGANDO CAMADAS..."),
-                (pegar_topicos, "PEGANDO TOPICOS..."),
-                (pegar_intervalos, "PEGANDO INTERVALOS..."),
-                (imagens_em_intervalos_topicos, "MONTANDO JSON IMAGENS DOS INTERVALOS..."),
-                (get_frase_imagem_intervalo, "MONTANDO JSON INTERVALO DE CADA IMAGENS..."),
-                (lambda: get_sentido_frase_imagens(self.tema), "MONTANDO A FRASE DE BUSCA DE CADA IMAGEM..."),
+                (criar_audio_tp, "CRIANDO AUDIO..."),
+                (cortes_audio_tp, "CRIANDO TRANSCRICAO..."),
+                (transcricao_audio_tp, "CRIANDO TRANSCRICAO WORDS..."),
+                (pegar_camadas_tp, "PEGANDO CAMADAS..."),
+                (pegar_topicos_tp, "PEGANDO TOPICOS..."),
+                (pegar_intervalos_tp, "PEGANDO INTERVALOS..."),
+                (imagens_em_intervalos_topicos_tp, "MONTANDO JSON IMAGENS DOS INTERVALOS..."),
+                (get_frase_imagem_intervalo_tp, "MONTANDO JSON INTERVALO DE CADA IMAGENS..."),
+                (lambda: get_sentido_frase_imagens_tp(self.tema), "MONTANDO A FRASE DE BUSCA DE CADA IMAGEM..."),
 
-                (pegar_imagens, "PEGANDO IMAGENS DA INTERNET..."),
-                (processamento_de_imagem, "PROCESSANDO IMAGENS..."),
-                (criar_video_ffmpeg, "CRIANDO VIDEO FINAL..."),
+                (pegar_imagens_tp, "PEGANDO IMAGENS DA INTERNET..."),
+                (processamento_de_imagem_tp, "PROCESSANDO IMAGENS..."),
+                (criar_video_ffmpeg_tp, "CRIANDO VIDEO FINAL..."),
 
                 # (processamento_de_imagem_shorts, "PROCESSANDO IMAGENS PARA O SHORTS..."),
                 # (criar_video_shorts, "CRIANDO VIDEO SHORTS..."),
