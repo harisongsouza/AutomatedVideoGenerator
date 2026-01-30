@@ -1,0 +1,128 @@
+
+nome_do_projeto/
+├── .venv/
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml
+├── docs/
+├── src/
+│   └── nome_do_pacote/
+│       ├── __init__.py
+│       ├── modulo1.py
+│       └── modulo2.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_modulo1.py
+│   └── test_modulo2.py
+├── .gitignore
+├── pyproject.toml
+├── README.md
+
+
+pyproject.toml: O coração da configuração moderna do projeto Python. Este arquivo substitui os antigos setup.py, requirements.txt e setup.cfg. Ele é usado para gerenciar dependências, definir a build do pacote, e configurar ferramentas de linting e formatação.
+
+
+
+pyproject.toml
+
+[tool.poetry]
+name = "nome_do_projeto"
+version = "0.1.0"
+description = "Uma breve descrição do seu projeto."
+authors = ["Seu Nome <seu.email@example.com>"]
+readme = "README.md"
+packages = [{include = "nome_do_pacote", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+black = "^23.7.0"
+ruff = "^0.0.285"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+
+--Inicializar projeto
+
+- Cookiecutter (o mais parecido com Spring Initializr)
+
+-Instalar: 
+
+pip install --user pipx
+pipx install cookiecutter
+
+-Um dos templates mais usados no mundo é (👉 Gera exatamente o que você descreveu e tem como template preferido):
+
+ "cookiecutter https://github.com/audreyfeldroy/cookiecutter-pypackage"
+
+
+-.venv
+
+É criada depois que o projeto existe: python -m venv .venv
+
+(em seguida ativa "source .venv/bin/activate"(linux) ".venv\Scripts\Activate.ps1"(win))
+
+(para sair da venv "deactivate")
+
+(Instale com 'pip install -e .')
+
+
+
+
+
+
+
+
+
+
+Mas se eu PRECISAR do requirements.txt?
+
+pip freeze > requirements.txt (para gerar o arquivo com as libs do projeto 'de forma congelada, versão == inves de >=')
+
+E para instalar depois:
+
+pip install -r requirements.txt
+
+(isso é legado, hoje usamos o pyproject.toml)
+
+
+
+instalar tudo do pyproject.toml:
+
+"pip install ." (instala tudo do arquivo)
+
+ou
+
+"pip install -e ." (se for so dependencias)
+
+
+para colocar dependencias do projeto no pyproject.poml:
+
+pip install pipreqs
+pipreqs .
+
+Isso analisa os imports e gera um requirements.txt só com as diretas.
+Aí você copia para o pyproject.toml.
+
+
+ou 
+
+pip freeze > requirements.txt (e coloca as dependencias no pyproject.toml)
+
+
+
+
+
+
+*PRECISA SEMPRE/ A CADA ALTERAÇÃO NO CODIGO EXECUTAR A SEQUENCIA:
+- pip install .
+- automated_video_generator
+*
