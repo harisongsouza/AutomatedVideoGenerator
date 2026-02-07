@@ -16,7 +16,10 @@ VERY_SMALL_THRESHOLD_H = TARGET_HEIGHT * 0.4
 
 # Caminho para o classificador Haar Cascade (ajuste se necessário)
 # MODIFICADO para usar o caminho padrão do OpenCV para melhor portabilidade
-HAAR_CASCADE_PATH = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml' 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Monta o caminho completo para o XML que agora está no build
+HAAR_CASCADE_PATH = os.path.join(BASE_DIR, "haarcascade_frontalface_default.xml")
 
 # Força do blur para o fundo (ajuste o raio)
 BLUR_RADIUS = 50
@@ -30,7 +33,7 @@ os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
 
 # Carregar o classificador de rosto
 if not os.path.exists(HAAR_CASCADE_PATH):
-    print(f"ERRO CRÍTICO: Arquivo Haar Cascade não encontrado em: {HAAR_CASCADE_PATH}")
+    print(f"topics ERRO CRÍTICO: Arquivo Haar Cascade não encontrado em: {HAAR_CASCADE_PATH}")
     exit()
 face_cascade = cv2.CascadeClassifier(HAAR_CASCADE_PATH)
 
@@ -118,10 +121,10 @@ def process_and_validate_image_revised(image_path, output_dir):
                 # ####################################################################
                 # ▼▼▼ ALTERAÇÃO PRINCIPAL E ÚNICA ESTÁ AQUI ▼▼▼
                 # ####################################################################
-                
+
                 # ANTES (CRIANDO FUNDO PRETO):
                 # final_canvas = Image.new("RGB", (TARGET_WIDTH, TARGET_HEIGHT), BACKGROUND_COLOR)
-                
+
                 # AGORA (CRIANDO FUNDO COM BLUR):
                 final_canvas = create_blurred_background(img_pil_original, TARGET_WIDTH, TARGET_HEIGHT, BLUR_RADIUS)
 
@@ -154,18 +157,18 @@ def process_and_validate_image_revised(image_path, output_dir):
             name, ext = os.path.splitext(base_name)
             output_filename_jpg = f"{name}_processed.jpg"
             output_path_jpg = f"{output_dir}/{output_filename_jpg}"
-            
+
             processed_img_pil.save(output_path_jpg, quality=95)
             print(f"  -> SUCESSO: Imagem salva em {output_path_jpg}")
 
             output_filename_json = f"{name}_processed.json"
             output_path_json = f"{output_dir}/{output_filename_json}"
-            
+
             metadata = {
                 "focal_point_on_target_canvas": [int(focal_point_on_target_canvas[0]), int(focal_point_on_target_canvas[1])]
                 if focal_point_on_target_canvas else [TARGET_WIDTH // 2, TARGET_HEIGHT // 2]
             }
-            
+
             json_path = "C:/Users/souza/Videos/VideoCreator/data/add_img_path_img_interv.json"
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
@@ -182,7 +185,7 @@ def process_and_validate_image_revised(image_path, output_dir):
                  print(f"     AVISO: Arquivo de metadados {json_path} não encontrado.")
             except Exception as e_json_read:
                  print(f"     AVISO: Falha ao ler JSON de metadados: {e_json_read}")
-            
+
             try:
                 with open(output_path_json, 'w') as f:
                     json.dump(metadata, f, indent=2)

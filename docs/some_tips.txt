@@ -54,7 +54,7 @@ build-backend = "poetry.core.masonry.api"
 
 - Cookiecutter (o mais parecido com Spring Initializr)
 
--Instalar: 
+-Instalar:
 
 pip install --user pipx
 pipx install cookiecutter
@@ -113,7 +113,7 @@ Isso analisa os imports e gera um requirements.txt só com as diretas.
 Aí você copia para o pyproject.toml.
 
 
-ou 
+ou
 
 pip freeze > requirements.txt (e coloca as dependencias no pyproject.toml)
 
@@ -126,3 +126,42 @@ pip freeze > requirements.txt (e coloca as dependencias no pyproject.toml)
 - pip install .
 - automated_video_generator
 *
+
+
+
+
+dependencias:
+
+PySide6
+edge_tts
+faster_whisper
+rapidfuzz
+thefuzz
+spacy
+
+
+
+CRIAR VM: "py -3.11 -m venv .venv"
+
+Por que usar o py em vez de python?
+No Windows, o comando py chama o Python Launcher. Ele é ótimo porque permite que você escolha qual versão rodar sem conflitos:
+Para rodar o 3.11: py -3.11 seu_script.py
+Para rodar o 3.14: py -3.14 seu_script.py
+
+
+Erro de spacy/thinc/numpy:
+
+ERRO: "python -m spacy download en_core_web_md"
+
+baixe: VC_redist.x64
+https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
+Esse erro acontece porque o spaCy e o seu motor de redes neurais, o Thinc, possuem partes escritas em linguagens de baixo nível (como C e C++) para serem ultravelozes.
+No Windows, esses módulos não conseguem rodar sozinhos; eles precisam de "ajudantes" chamados bibliotecas de tempo de execução (Runtime).
+
+
+
+O windows tem que ter o FFMPEG:
+
+"winget install ffmpeg" (Powershell)
+

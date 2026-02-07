@@ -16,7 +16,11 @@ VERY_SMALL_THRESHOLD_W = TARGET_WIDTH * 0.4
 VERY_SMALL_THRESHOLD_H = TARGET_HEIGHT * 0.4
 
 # Caminho para o classificador Haar Cascade (ajuste se necessário)
-HAAR_CASCADE_PATH = 'haarcascade_frontalface_default.xml' # Garanta que este arquivo exista
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Monta o caminho completo para o XML que agora está no build
+HAAR_CASCADE_PATH = os.path.join(BASE_DIR, "haarcascade_frontalface_default.xml")
+
 
 # Força do blur para o fundo (ajuste o raio)
 BLUR_RADIUS = 50
@@ -29,7 +33,7 @@ os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
 
 # Carregar o classificador de rosto
 if not os.path.exists(HAAR_CASCADE_PATH):
-    print(f"ERRO CRÍTICO: Arquivo Haar Cascade não encontrado em: {HAAR_CASCADE_PATH}")
+    print(f"layer ERRO CRÍTICO: Arquivo Haar Cascade não encontrado em: {HAAR_CASCADE_PATH}")
     exit()
 face_cascade = cv2.CascadeClassifier(HAAR_CASCADE_PATH)
 
@@ -150,7 +154,7 @@ def process_and_validate_image_revised(image_path, output_dir):
             output_filename_jpg = f"{name}_processed.jpg"
             #output_path_jpg = os.path.join(output_dir, output_filename_jpg)
             output_path_jpg = f"{output_dir}/{output_filename_jpg}"
-            
+
             # Salva a imagem JPG
             processed_img_pil.save(output_path_jpg, quality=95)
             print(f"  -> SUCESSO: Imagem salva em {output_path_jpg}")
@@ -159,25 +163,25 @@ def process_and_validate_image_revised(image_path, output_dir):
             output_filename_json = f"{name}_processed.json"
             #output_path_json = os.path.join(output_dir, output_filename_json)
             output_path_json = f"{output_dir}/{output_filename_json}"
-            
+
             metadata = {
                 "focal_point_on_target_canvas": [int(focal_point_on_target_canvas[0]), int(focal_point_on_target_canvas[1])]
                 if focal_point_on_target_canvas else [TARGET_WIDTH // 2, TARGET_HEIGHT // 2] # Fallback para centro do canvas
             }
-            
+
             json_path = "C:/Users/souza/Downloads/VideoCreator/data/add_img_path_img_interv.json"
             with open(json_path, "r", encoding="utf-8") as f:
                 tra = json.load(f)
-            
+
             obj_da_imagem = encontrar_imagem_por_path(tra, image_path)
-            
+
             if obj_da_imagem:
                 metadata['start'] = obj_da_imagem['start']
                 metadata['end'] = obj_da_imagem['end']
                 print("✅ Objeto atualizado:")
             else:
                 print("❌ Imagem não encontrada.")
-            
+
             try:
                 with open(output_path_json, 'w') as f:
                     json.dump(metadata, f, indent=2)
@@ -239,6 +243,6 @@ def main():
         # print("Lista de caminhos válidos:", valid_image_paths)
 
     # A lista `valid_image_paths` contém os caminhos prontos para MoviePy.
-    
+
 if __name__ == "__main__":
     main()
