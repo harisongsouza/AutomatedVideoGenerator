@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 def adicionar_imagens_em_intervalos(entrada_json, saida_json, duracao_imagem=6, tolerancia_minima=4):
     """
@@ -13,7 +14,7 @@ def adicionar_imagens_em_intervalos(entrada_json, saida_json, duracao_imagem=6, 
     for intervalo in intervalos:
         inicio = intervalo["start"]
         fim = intervalo["end"]
-        
+
         # Usa o nome do próprio intervalo como base para os nomes das imagens.
         # Ex: "intervalo_introducao", "intervalo_conclusao", etc.
         base_nome_imagem = intervalo["nome"]
@@ -65,8 +66,9 @@ def adicionar_imagens_em_intervalos(entrada_json, saida_json, duracao_imagem=6, 
 
 def main():
     # Caminhos dos arquivos
-    entrada_path = "C:/Users/souza/Videos/VideoCreator/data/intervalos_entre_topicos.json"
-    saida_path = "C:/Users/souza/Videos/VideoCreator/data/imagens_em_intervalos_topicos.json"
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    entrada_path = BASE_DIR / "data" / "topics_video" / "intervalos_entre_topicos.json"
+    saida_path = BASE_DIR / "data" / "topics_video" / "imagens_em_intervalos_topicos.json"
 
     # Parâmetros de tempo para exibição de cada imagem (em segundos)
     duracao_imagem = 15.0
@@ -74,7 +76,7 @@ def main():
 
     # Gerar e salvar
     adicionar_imagens_em_intervalos(entrada_path, saida_path, duracao_imagem, tolerancia_minima)
-    
-    
+
+
 if __name__ == "__main__":
     main()

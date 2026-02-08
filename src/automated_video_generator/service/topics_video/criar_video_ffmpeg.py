@@ -17,28 +17,32 @@ from PIL import Image
 from pydub import AudioSegment
 from pydub.silence import detect_nonsilent
 
-#CONFIGURACAO
-PROCESSED_DIR = 'C:/Users/souza/Videos/VideoCreator/assets/imagens/imagens_processadas/'
+from pathlib import Path
 
-TEMP_WORK_DIR = 'C:/Users/souza/Videos/VideoCreator/assets/videos/intervalo_entre_topicos/' # Pasta para frames e vídeos intermediários
+
+#CONFIGURACAO
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PROCESSED_DIR = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
+TEMP_WORK_DIR = BASE_DIR / "assets" / "topics_video" / "videos" / "intervalo_entre_topicos" # Pasta para frames e vídeos intermediários
 
 KB_ZOOM_START = 1.0
 KB_ZOOM_END_RANGE = (1.15, 1.35)
 KB_PAN_AMOUNT = 0.1 # % da dimensão da imagem para o pan
 
-IMAGE_FOLDER = "C:/Users/souza/Videos/VideoCreator/assets/imagens/imagens_camadas/imagens_sobreposta_camadas/" # CRIE ESTA PASTA E COLOQUE SUAS IMAGENS AQUI
+IMAGE_FOLDER = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_camadas" / "imagens_sobreposta_camadas" # CRIE ESTA PASTA E COLOQUE SUAS IMAGENS AQUI
 
 RESOLUCAO_VIDEO = '1920x1080'
 VIDEO_WIDTH = 1920
 VIDEO_HEIGHT = 1080
 VIDEO_FPS = 30
 
-NARRACAO_AUDIO_FILE = 'C:/Users/souza/Videos/VideoCreator/assets/audio/narracao.wav'
-MUSICA_BACKGROUND_FILE = 'C:/Users/souza/Videos/VideoCreator/assets/audio/musica_fundo.mp3'
-AUDIO_FINAL_FILE_PATH = 'C:/Users/souza/Videos/VideoCreator/assets/audio/audio_final.mp3'
+NARRACAO_AUDIO_FILE = BASE_DIR / "assets" / "topics_video" / "audio" / "narracao.wav"
+MUSICA_BACKGROUND_FILE = BASE_DIR / "assets" / "topics_video" / "audio" / "musica_fundo.mp3"
+AUDIO_FINAL_FILE_PATH = BASE_DIR / "assets" / "topics_video" / "audio" / "audio_final.mp3"
 
-INTRO_VIDEO_PATH = 'C:/Users/souza/Videos/VideoCreator/assets/videos/camadas/video_original_intro_encerramento.mp4'
-ENCERRAMENTO_VIDEO_PATH = 'C:/Users/souza/Videos/VideoCreator/assets/videos/camadas/video_original_intro_encerramento.mp4'
+INTRO_VIDEO_PATH = BASE_DIR / "assets" / "topics_video" / "videos" / "camadas" / "video_original_intro_encerramento.mp4"
+ENCERRAMENTO_VIDEO_PATH = BASE_DIR / "assets" / "topics_video" / "videos" / "camadas" / "video_original_intro_encerramento.mp4"
 
 
 def loop_audio(musica, target_length):
@@ -53,7 +57,7 @@ def criar_audio_com_ducking():
     narracao_path = NARRACAO_AUDIO_FILE
     musica_path = MUSICA_BACKGROUND_FILE
     output_audio_path = AUDIO_FINAL_FILE_PATH
-    
+
     narracao = AudioSegment.from_file(narracao_path)
     musica = AudioSegment.from_file(musica_path)
     musica = loop_audio(musica, len(narracao))
@@ -148,9 +152,9 @@ def gerar_video_com_videos_e_audio(audio_path, output_path, resolucao, fps, elem
         print("Error:", e.stderr)
 
 
-    
+
 #----------------------
-    
+
 def adicionar_texto_e_imagem(
     input_video,
     output_video,
@@ -174,14 +178,14 @@ def adicionar_texto_e_imagem(
 
     inputs = ["-y", "-i", input_video]
     filter_parts = []  # Lista para construir a string do filter_complex
-    
+
     current_video_input_label = "[0:v]"
 
     if imagem:
         inputs.extend(["-i", imagem]) # Adiciona a imagem como uma entrada
-        
+
         imagem_pos_y = texto_y + fonte_tamanho + distancia_texto_imagem
-        
+
         # 1. Redimensiona a imagem e nomeia o resultado como [img_scaled]
         filter_parts.append(f"[1:v]scale={imagem_largura}:{imagem_altura}[img_scaled]")
 
@@ -209,19 +213,19 @@ def adicionar_texto_e_imagem(
         )
         # Adiciona o filtro drawtext ao stream de vídeo atual (que pode ser o original ou com imagem).
         filter_parts.append(f"{current_video_input_label}drawtext={drawtext_params}")
-        
+
     comando = ["ffmpeg"] + inputs
-    
+
     if filter_parts:
         comando.extend(["-filter_complex", ";".join(filter_parts)])
-    
+
     # Copia o stream de áudio do original para o vídeo de saída.
     comando.extend(["-c:a", "copy", output_video])
 
     print("Executando FFmpeg:")
     print(" ".join(comando))
     subprocess.run(comando, check=True)
-    
+
 
 # 1. Sua função de easing
 def ease_in_out_sine(t):
@@ -263,11 +267,11 @@ def generate_ken_burns_frames(
     w, h = video_width, video_height # Dimensões para os cálculos de Ken Burns
 
     focal_point = focal_point_orig if focal_point_orig else (w // 2, h // 2)
-    
+
     # Ajuste o pan_amount para ser relativo às dimensões do vídeo
     max_pan_x = w * pan_amount
     max_pan_y = h * pan_amount
-    
+
     pan_start_x = random.uniform(-max_pan_x / 2, max_pan_x / 2)
     pan_start_y = random.uniform(-max_pan_y / 2, max_pan_y / 2)
     pan_end_x = random.uniform(-max_pan_x / 2, max_pan_x / 2)
@@ -278,13 +282,13 @@ def generate_ken_burns_frames(
     for i in range(num_frames):
         progress = i / (num_frames -1) if num_frames > 1 else 1.0 # Evita divisão por zero se num_frames == 1
         eased = ease_func(progress)
-        
+
         current_zoom = zoom_start + (zoom_end - zoom_start) * eased
         if current_zoom == 0: current_zoom = 1e-6 # Evita divisão por zero
 
         current_pan_x = pan_start_x + (pan_end_x - pan_start_x) * eased
         current_pan_y = pan_start_y + (pan_end_y - pan_start_y) * eased
-        
+
         crop_w = int(w / current_zoom)
         crop_h = int(h / current_zoom)
 
@@ -293,10 +297,10 @@ def generate_ken_burns_frames(
 
         center_x = focal_point[0] + current_pan_x
         center_y = focal_point[1] + current_pan_y
-        
+
         left = max(0, min(center_x - crop_w / 2, w - crop_w))
         top = max(0, min(center_y - crop_h / 2, h - crop_h))
-        
+
         left = int(left)
         top = int(top)
         right = int(left + crop_w)
@@ -307,7 +311,7 @@ def generate_ken_burns_frames(
         if bottom > h: bottom = h; top = max(0, h - crop_h)
         if left < 0: left = 0
         if top < 0: top = 0
-        
+
         final_crop_w = right - left
         final_crop_h = bottom - top
 
@@ -317,10 +321,10 @@ def generate_ken_burns_frames(
         else:
             cropped = img_base.crop((left, top, right, bottom))
             frame_image = cropped.resize((video_width, video_height), Image.Resampling.LANCZOS)
-        
+
         frame_filename = os.path.join(output_frames_dir, f"frame_{i:05d}.png")
         frame_image.save(frame_filename)
-        
+
     return num_frames
 
 # 3. Função para criar vídeo a partir de frames usando ffmpeg
@@ -363,7 +367,7 @@ def redimensionar_video(input_path, output_path, largura, altura):
         output_path
     ]
     subprocess.run(comando, check=True)
-    
+
 
 def adicionar_texto_e_imagem_sem_imagens_sobreposta(
     input_video,
@@ -437,7 +441,7 @@ def adicionar_texto_e_imagem_sem_imagens_sobreposta(
     print("Executando FFmpeg:")
     print(" ".join(comando))
     subprocess.run(comando, check=True)
-    
+
 
 def concatenar_videos_com_tempo(objetos, output_path, resolucao="1920x1080", fps=30):
     objetos = sorted(objetos, key=lambda x: x["inicio"])
@@ -494,7 +498,7 @@ def concatenar_videos_com_tempo(objetos, output_path, resolucao="1920x1080", fps
     subprocess.run(cmd, check=True)
 
     print("✅ Vídeo final gerado:", output_path)
-    
+
 
 
 import subprocess
@@ -687,7 +691,7 @@ def recortar_clip(input_path, output_path_corte, duracao_alvo_segundos, inicio_s
                 pass
         return None
 
-    
+
 
 def padronizar_clip_v1(input_path, output_path, duracao_clip=None,
                     largura_padrao=VIDEO_WIDTH, altura_padrao=VIDEO_HEIGHT,
@@ -784,14 +788,14 @@ def padronizar_clip_v1(input_path, output_path, duracao_clip=None,
             "size:"
             "fadein"
             "fadeout=False"
-            
+
         if inserir_imagem:
             "path:"
             "position:"
             "size:"
             "fadein"
             "fadeout=False"
-        
+
 ####################### RENDERIZAR ############################################################s##################################
 
 
@@ -972,18 +976,18 @@ def padronizar_clip(input_path, output_path, duracao_clip=None,
             # Defina uma largura máxima de caracteres por linha (ajuste conforme necessário)
             # Este valor é uma estimativa. Fontes de largura variável podem exigir ajustes.
             largura_max_caracteres = 40  # Exemplo: 30 caracteres por linha
-            
+
             # Cria um objeto TextWrapper
             # break_long_words=False evita quebrar palavras no meio, se possível
             # replace_whitespace=False mantém espaços existentes (exceto os usados para quebrar)
-            wrapper = textwrap.TextWrapper(width=largura_max_caracteres, 
-                                           break_long_words=True, 
+            wrapper = textwrap.TextWrapper(width=largura_max_caracteres,
+                                           break_long_words=True,
                                            replace_whitespace=False,
                                            break_on_hyphens=False) # Evita quebrar em hífens se não for desejado
-            
+
             # Quebra o texto original em uma lista de linhas
             linhas_quebradas = wrapper.wrap(text=texto_original)
-            
+
             # Junta as linhas com o caractere de nova linha '\n'
             texto_formatado = "\n".join(linhas_quebradas)
             # --- FIM DO NOVO CÓDIGO ---
@@ -1013,12 +1017,12 @@ def padronizar_clip(input_path, output_path, duracao_clip=None,
                 f"y=(h-text_h)/2:"
                 f"alpha='{alpha_expr}'"
             )
-            
+
             label_drawtext = "[video_com_texto]"
             filter_complex_parts.append(f"{current_video_label}drawtext={drawtext}{label_drawtext}")
             current_video_label = label_drawtext
-            
-       
+
+
         cmd_standardize = ['ffmpeg', '-y'] + input_indices
 
         if filter_complex_parts:
@@ -1137,7 +1141,7 @@ def concatenar_clips_com_narracao(lista_info_clips, caminho_narracao, output_pat
             print(f"Código de Retorno: {concat_process.returncode}")
             print(f"stderr: {concat_process.stderr}")
             return None
-        
+
         print(f"Vídeos concatenados temporariamente em: {temp_concatenated_video_path}")
 
         # Etapa 2: Adicionar narração ao vídeo concatenado
@@ -1166,7 +1170,7 @@ def concatenar_clips_com_narracao(lista_info_clips, caminho_narracao, output_pat
             print(f"stderr: {narration_process.stderr}")
             return None
 
-        print(f"✅ Vídeo final com narração salvo em: {output_path}") 
+        print(f"✅ Vídeo final com narração salvo em: {output_path}")
         return output_path
 
     except Exception as e:
@@ -1178,14 +1182,14 @@ def concatenar_clips_com_narracao(lista_info_clips, caminho_narracao, output_pat
                 os.remove(temp_concat_list_path)
             except OSError as e:
                 print(f"Aviso: não foi possível remover o arquivo temporário de lista {temp_concat_list_path}: {e}")
-        
+
         if temp_concatenated_video_path and os.path.exists(temp_concatenated_video_path):
             try:
                 os.remove(temp_concatenated_video_path)
             except OSError as e:
                 print(f"Aviso: não foi possível remover o arquivo de vídeo concatenado temporário {temp_concatenated_video_path}: {e}")
-                
-                 
+
+
 
 
 
@@ -1211,9 +1215,9 @@ def ordenar_json_por_inicio(caminho_entrada, caminho_saida=None):
 
 
 
-                    
-    
-    
+
+
+
 def get_audio_duration_1(audio_path):
     cmd = [
         "ffprobe", "-v", "error",
@@ -1224,8 +1228,8 @@ def get_audio_duration_1(audio_path):
     result = subprocess.run(cmd, capture_output=True, text=True)
     info = json.loads(result.stdout)
     return float(info["format"]["duration"])
-    
-    
+
+
 def criar_video_fundo_preto_e_audio(audio_path, output_path):
     # Parâmetros
     duration = get_audio_duration_1(audio_path)  # duração do vídeo em segundos (ajuste conforme o áudio)
@@ -1243,7 +1247,7 @@ def criar_video_fundo_preto_e_audio(audio_path, output_path):
 
     subprocess.run(cmd, check=True)
     print("Vídeo com fundo preto criado:", output_path)
-    
+
 
 def criar_video_fundo_preto(audio_path, output_path):
     # Parâmetros
@@ -1278,11 +1282,11 @@ def adicionar_audio_ao_video(video_sem_audio: str, audio_path: str, output_path:
         "-b:a", "192k",               # Qualidade razoável
         output_path
     ]
-    
+
     subprocess.run(cmd, check=True)
     print(f"Áudio adicionado ao vídeo: {output_path}")
-       
-    
+
+
 def adicionar_camadas_ao_video_base(
     video_base_path,
     camadas,
@@ -1375,12 +1379,12 @@ def adicionar_camadas_ao_video_base(
         print("❌ Erro ao gerar o vídeo.")
         print("Comando:", e.cmd)
         print("Output:", e.stdout)
-        print("Error:", e.stderr)   
-    
-    
+        print("Error:", e.stderr)
 
-   
-   
+
+
+
+
 import json
 import subprocess
 import os
@@ -1438,9 +1442,9 @@ def preencher_lacunas_temporais(
 
     try:
         subprocess.run(
-            ["ffmpeg", "-version"], 
-            stdout=subprocess.DEVNULL, 
-            stderr=subprocess.DEVNULL, 
+            ["ffmpeg", "-version"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
             check=True
         )
     except (subprocess.CalledProcessError, FileNotFoundError):
@@ -1454,7 +1458,7 @@ def preencher_lacunas_temporais(
     else:
         base_dir_json = os.path.dirname(os.path.abspath(caminho_arquivo_json))
         diretorio_saida_absoluto = os.path.join(base_dir_json, diretorio_clips_gerados)
-    
+
     try:
         os.makedirs(diretorio_saida_absoluto, exist_ok=True)
         print(f"Clipes de preenchimento serão salvos em: {diretorio_saida_absoluto}")
@@ -1489,7 +1493,7 @@ def preencher_lacunas_temporais(
 
     nova_lista_de_clipes = []
     nova_lista_de_clipes.append(clipes[0])
-    
+
     offset_tempo = 0.1  # Ajuste de 0.1 segundos em cada extremidade da lacuna
 
     for i in range(len(clipes) - 1):
@@ -1501,7 +1505,7 @@ def preencher_lacunas_temporais(
             print("Aviso: Clipe atual ou seguinte está com chaves 'fim' ou 'inicio' ausentes. Pulando.")
             nova_lista_de_clipes.append(clipe_seguinte)
             continue
-        
+
         if not isinstance(clipe_atual['fim'], (int, float)) or \
            not isinstance(clipe_seguinte['inicio'], (int, float)):
             print("Aviso: 'fim' do clipe atual ou 'inicio' do clipe seguinte não são numéricos. Pulando.")
@@ -1513,7 +1517,7 @@ def preencher_lacunas_temporais(
 
         if fim_atual < inicio_seguinte:  # Verifica se existe uma lacuna
             duracao_lacuna_original = inicio_seguinte - fim_atual
-            
+
             # Verifica se a lacuna original é grande o suficiente para o ajuste
             if duracao_lacuna_original > (2 * offset_tempo):
                 novo_inicio_clipe_lacuna = fim_atual + offset_tempo
@@ -1528,7 +1532,7 @@ def preencher_lacunas_temporais(
 
                 print(f"Lacuna original detectada: {fim_atual:.3f} -> {inicio_seguinte:.3f} (Duração: {duracao_lacuna_original:.3f}s).")
                 print(f"  Aplicando ajuste de {offset_tempo:.1f}s: Novo clipe terá Início: {novo_inicio_clipe_lacuna:.3f}, Fim: {novo_fim_clipe_lacuna:.3f}, Duração do vídeo: {duracao_video_efetiva:.3f}s.")
-                
+
                 nome_arquivo_lacuna = f"black_video_gap_{str(uuid.uuid4())}.mp4"
                 caminho_completo_clipe_lacuna = os.path.join(diretorio_saida_absoluto, nome_arquivo_lacuna)
 
@@ -1550,15 +1554,15 @@ def preencher_lacunas_temporais(
                 print(f"Lacuna detectada entre {fim_atual:.3f} e {inicio_seguinte:.3f} (duração: {duracao_lacuna_original:.3f}s) "
                       f"é muito curta (<= {2 * offset_tempo:.1f}s) para aplicar o ajuste de {offset_tempo:.1f}s em cada extremidade. "
                       "Esta lacuna não será preenchida com um novo clipe.")
-        
+
         nova_lista_de_clipes.append(clipe_seguinte)
 
     return nova_lista_de_clipes
 
 
-            
+
 # Exemplo de uso
-def main(): 
+def main():
     print("Carregando imagens e metadados...")
     image_data = []
     for filename in sorted(os.listdir(PROCESSED_DIR)):
@@ -1592,36 +1596,36 @@ def main():
 
     # Ordena por tempo de início
     image_data.sort(key=lambda x: x["start"])
-    
+
     clips = []
     clips_lista = []
 
-    
+
     # --- ÁUDIO ---
     print("Gerando áudio...")
     try:
         criar_audio_com_ducking()
     except Exception as e_audio:
         print(f"Erro ao gerar áudio: {e_audio}") #descomente se quiser audio narracao com musica de fundo
-                    
-    with open("C:/Users/souza/Videos/VideoCreator/data/topicos.json", 'r', encoding="utf-8") as f:
+
+    with open(BASE_DIR / "data" / "topics_video" / "topicos.json", 'r', encoding="utf-8") as f:
         topicos_tempos = json.load(f)
-        
-    with open("C:/Users/souza/Videos/VideoCreator/data/intervalos_entre_topicos.json", 'r', encoding="utf-8") as f:
+
+    with open(BASE_DIR / "data" / "topics_video" / "intervalos_entre_topicos.json", 'r', encoding="utf-8") as f:
         intervalo_entre_topicos_tempos = json.load(f)
-    
+
     # --- INTRO ---
     for intervalo_camada in intervalo_entre_topicos_tempos:
         if intervalo_camada["nome"] == "intervalo_introducao":
             inicio = intervalo_camada["start"]
             fim = intervalo_camada["end"]
             duracao_intervalo = fim - inicio
-            
+
             clip_padronizado = padronizar_clip(
-                input_path=INTRO_VIDEO_PATH, 
-                output_path="C:/Users/souza/Videos/VideoCreator/assets/videos/camadas/videos_padronizado/video_introducao_padronizado.mp4", 
-                duracao_clip=duracao_intervalo, 
-                fade_in=True, 
+                input_path=INTRO_VIDEO_PATH,
+                output_path=BASE_DIR / "assets" / "topics_video" / "videos" / "camadas" / "videos_padronizado" / "video_introducao_padronizado.mp4",
+                duracao_clip=duracao_intervalo,
+                fade_in=True,
                 fade_out=True
             )
 
@@ -1636,15 +1640,15 @@ def main():
             }
             #intro_lista.append(camada_obj)
             clips.append(camada_obj)
-                        
-        
+
+
     #TOPICOS
     for i, topico in enumerate(topicos_tempos):
-        path_video_editado = f"C:/Users/souza/Videos/VideoCreator/assets/videos/topicos/{i}.mp4"
+        path_video_editado = BASE_DIR / "assets" / "topics_video" / "videos" / f"topicos/{i}.mp4"
         #path_video_editado = f"C:/Users/souza/Videos/VideoCreator/{i}.mp4"
-               
-        intervalo_duracao = topico["end"] - topico["start"]  
-        
+
+        intervalo_duracao = topico["end"] - topico["start"]
+
         txt = [{
             "text": topico["word"].title().replace('"', '').replace(":", '').replace("'", ''),
             "font": "Arial",
@@ -1655,12 +1659,12 @@ def main():
             "fadein": True,
             "fadeout": True
         }]
-                
+
         clip_padronizado = padronizar_clip(
-            input_path="C:/Users/souza/Videos/VideoCreator/assets/videos/possiveis_intro.mp4", 
-            output_path=path_video_editado,  
-            duracao_clip=intervalo_duracao, 
-            fade_in=False, 
+            input_path=BASE_DIR / "assets" / "topics_video" / "videos" / "possiveis_intro.mp4",
+            output_path=path_video_editado,
+            duracao_clip=intervalo_duracao,
+            fade_in=False,
             fade_out=False,
             inserir_texto=txt
 
@@ -1678,14 +1682,14 @@ def main():
         #topicos_lista.append(camada_obj)
         clips.append(camada_obj)
 
-    
+
     #CLIPS
     for i, data in enumerate(image_data):
         print(f"\nProcessando imagem {i+1}/{len(image_data)}: {os.path.basename(data['img_path'])}")
-        
+
         clip_frames_dir = os.path.join(TEMP_WORK_DIR, f"clip_{i}_frames")
         intermediate_video_path = os.path.join(TEMP_WORK_DIR, f"clip_{i}.mp4")
-        
+
         # 1. Gerar frames para o clipe atual
         print(f"Gerando frames em: {clip_frames_dir}")
         num_generated_frames = generate_ken_burns_frames(
@@ -1723,19 +1727,19 @@ def main():
                 print(f"Falha ao criar vídeo para {data['img_path']}. Pulando.")
         else:
             print(f"Nenhum frame gerado para {data['img_path']}. Pulando.")
-       
+
     # --- ENCERRAMENTO ---
     for intervalo_camada in intervalo_entre_topicos_tempos:
         if intervalo_camada["nome"] == "intervalo_conclusao":
             inicio = intervalo_camada["start"]
             fim = intervalo_camada["end"]
             duracao_intervalo = fim - inicio
-            
+
             clip_padronizado = padronizar_clip(
-                input_path=ENCERRAMENTO_VIDEO_PATH, 
-                output_path="C:/Users/souza/Videos/VideoCreator/assets/videos/camadas/videos_padronizado/video_encerramento_padronizado.mp4", 
-                duracao_clip=duracao_intervalo, 
-                fade_in=True, 
+                input_path=ENCERRAMENTO_VIDEO_PATH,
+                output_path=BASE_DIR / "assets" / "topics_video" / "videos" / "camadas" / "videos_padronizado" / "video_encerramento_padronizado.mp4",
+                duracao_clip=duracao_intervalo,
+                fade_in=True,
                 fade_out=True
             )
 
@@ -1750,28 +1754,28 @@ def main():
             }
             #intro_lista.append(camada_obj)
             clips.append(camada_obj)
-                 
-                    
+
+
     # --- RENDER ---
 
-    with open("C:/Users/souza/Videos/VideoCreator/data/final_list_render.json", "w", encoding="utf-8") as f:
+    with open(BASE_DIR / "data" / "topics_video" / "final_list_render.json", "w", encoding="utf-8") as f:
         json.dump(clips, f, ensure_ascii=False, indent=2)
-              
-    ordenar_json_por_inicio("C:/Users/souza/Videos/VideoCreator/data/final_list_render.json", "C:/Users/souza/Videos/VideoCreator/data/final_list_render.json")
 
-    lista_com_lacunas_preenchidas = preencher_lacunas_temporais("C:/Users/souza/Videos/VideoCreator/data/final_list_render.json")
-        
-    with open("C:/Users/souza/Videos/VideoCreator/data/dados_video_corrigido.json", "w", encoding="utf-8") as f_out:
+    ordenar_json_por_inicio(BASE_DIR / "data" / "topics_video" / "final_list_render.json", BASE_DIR / "data" / "topics_video" / "final_list_render.json")
+
+    lista_com_lacunas_preenchidas = preencher_lacunas_temporais(BASE_DIR / "data" / "topics_video" / "final_list_render.json")
+
+    with open(BASE_DIR / "data" / "topics_video" / "dados_video_corrigido.json", "w", encoding="utf-8") as f_out:
         json.dump(lista_com_lacunas_preenchidas, f_out, indent=2, ensure_ascii=False)
-    
+
     print("\nResultado salvo em 'dados_video_corrigido.json'")
-    
-    with open("C:/Users/souza/Videos/VideoCreator/data/dados_video_corrigido.json", 'r', encoding="utf-8") as f:
+
+    with open(BASE_DIR / "data" / "topics_video" / "dados_video_corrigido.json", 'r', encoding="utf-8") as f:
         intervalos_final_list = json.load(f)
-                            
-    concatenar_clips_com_narracao(intervalos_final_list, AUDIO_FINAL_FILE_PATH, "C:/Users/souza/Videos/VideoCreator/end_video.mp4")
+
+    concatenar_clips_com_narracao(intervalos_final_list, AUDIO_FINAL_FILE_PATH, BASE_DIR / "data" / "topics_video" / "videos" / "output" / "end_video.mp4")
     #concatenar_clips_com_narracao(intervalos_final_list, NARRACAO_AUDIO_FILE, "C:/Users/souza/Videos/VideoCreator/end_video.mp4") #sem audio de fundo
-    
-        
+
+
 if __name__ == "__main__":
     main()

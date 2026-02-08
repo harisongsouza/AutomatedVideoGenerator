@@ -75,7 +75,7 @@ class Worker(QObject):
                 (criar_audio_tp, "CRIANDO AUDIO..."),
                 (cortes_audio_tp, "CRIANDO TRANSCRICAO..."),
                 (transcricao_audio_tp, "CRIANDO TRANSCRICAO WORDS..."),
-                (pegar_camadas_tp, "PEGANDO CAMADAS..."),
+                #(pegar_camadas_tp, "PEGANDO CAMADAS..."),
                 (pegar_topicos_tp, "PEGANDO TOPICOS..."),
                 (pegar_intervalos_tp, "PEGANDO INTERVALOS..."),
                 (imagens_em_intervalos_topicos_tp, "MONTANDO JSON IMAGENS DOS INTERVALOS..."),

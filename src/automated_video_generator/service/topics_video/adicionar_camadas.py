@@ -49,7 +49,7 @@ def criar_audio_com_ducking():
     narracao_path = NARRACAO_AUDIO_FILE
     musica_path = MUSICA_BACKGROUND_FILE
     output_audio_path = AUDIO_FINAL_FILE_PATH
-    
+
     narracao = AudioSegment.from_file(narracao_path)
     musica = AudioSegment.from_file(musica_path)
     musica = loop_audio(musica, len(narracao))
@@ -144,7 +144,7 @@ def gerar_video_com_videos_e_audio(audio_path, output_path, resolucao, fps, elem
         print("Error:", e.stderr)
 
 
-    
+
 #----------------------
 
 """ def adicionar_texto_e_imagem(
@@ -163,7 +163,7 @@ def gerar_video_com_videos_e_audio(audio_path, output_path, resolucao, fps, elem
 ):
     filtro = ""
     inputs = ["-y", "-i", input_video]
-    
+
     if imagem:  # se uma imagem foi fornecida
         imagem_y = texto_y + fonte_tamanho + distancia_texto_imagem
         inputs += ["-i", imagem]
@@ -194,7 +194,7 @@ def gerar_video_com_videos_e_audio(audio_path, output_path, resolucao, fps, elem
     print("Executando FFmpeg:")
     print(" ".join(comando))
     subprocess.run(comando, check=True) """
-    
+
 def adicionar_texto_e_imagem(
     input_video,
     output_video,
@@ -220,20 +220,20 @@ def adicionar_texto_e_imagem(
 
     inputs = ["-y", "-i", input_video]
     filter_parts = []  # Lista para construir a string do filter_complex
-    
+
     # Rótulo do stream de vídeo que será usado como entrada para o próximo filtro.
     # Começa com o vídeo de entrada principal [0:v].
     current_video_input_label = "[0:v]"
 
     if imagem:
         inputs.extend(["-i", imagem]) # Adiciona a imagem como uma entrada
-        
+
         # Calcula a posição Y da imagem relativa à posição Y do texto.
         # A imagem ficará abaixo do texto.
         # Ambos (texto e imagem) são centralizados horizontalmente na tela,
         # o que os alinha horizontalmente.
         imagem_pos_y = texto_y + fonte_tamanho + distancia_texto_imagem
-        
+
         # 1. Redimensiona a imagem e nomeia o resultado como [img_scaled]
         filter_parts.append(f"[1:v]scale={imagem_largura}:{imagem_altura}[img_scaled]")
         # 2. Sobrepõe a imagem redimensionada no stream de vídeo atual.
@@ -265,21 +265,21 @@ def adicionar_texto_e_imagem(
         )
         # Adiciona o filtro drawtext ao stream de vídeo atual (que pode ser o original ou com imagem).
         filter_parts.append(f"{current_video_input_label}drawtext={drawtext_params}")
-        
+
     comando = ["ffmpeg"] + inputs
-    
+
     # Se houver partes de filtro (ou seja, se imagem ou texto foram adicionados),
     # monta a string do filter_complex e a adiciona ao comando.
     if filter_parts:
         comando.extend(["-filter_complex", ";".join(filter_parts)])
-    
+
     # Copia o stream de áudio do original para o vídeo de saída.
     comando.extend(["-c:a", "copy", output_video])
 
     print("Executando FFmpeg:")
     print(" ".join(comando))
     subprocess.run(comando, check=True)
-    
+
 
 # 1. Sua função de easing
 def ease_in_out_sine(t):
@@ -321,11 +321,11 @@ def generate_ken_burns_frames(
     w, h = video_width, video_height # Dimensões para os cálculos de Ken Burns
 
     focal_point = focal_point_orig if focal_point_orig else (w // 2, h // 2)
-    
+
     # Ajuste o pan_amount para ser relativo às dimensões do vídeo
     max_pan_x = w * pan_amount
     max_pan_y = h * pan_amount
-    
+
     pan_start_x = random.uniform(-max_pan_x / 2, max_pan_x / 2)
     pan_start_y = random.uniform(-max_pan_y / 2, max_pan_y / 2)
     pan_end_x = random.uniform(-max_pan_x / 2, max_pan_x / 2)
@@ -336,13 +336,13 @@ def generate_ken_burns_frames(
     for i in range(num_frames):
         progress = i / (num_frames -1) if num_frames > 1 else 1.0 # Evita divisão por zero se num_frames == 1
         eased = ease_func(progress)
-        
+
         current_zoom = zoom_start + (zoom_end - zoom_start) * eased
         if current_zoom == 0: current_zoom = 1e-6 # Evita divisão por zero
 
         current_pan_x = pan_start_x + (pan_end_x - pan_start_x) * eased
         current_pan_y = pan_start_y + (pan_end_y - pan_start_y) * eased
-        
+
         crop_w = int(w / current_zoom)
         crop_h = int(h / current_zoom)
 
@@ -351,10 +351,10 @@ def generate_ken_burns_frames(
 
         center_x = focal_point[0] + current_pan_x
         center_y = focal_point[1] + current_pan_y
-        
+
         left = max(0, min(center_x - crop_w / 2, w - crop_w))
         top = max(0, min(center_y - crop_h / 2, h - crop_h))
-        
+
         left = int(left)
         top = int(top)
         right = int(left + crop_w)
@@ -365,7 +365,7 @@ def generate_ken_burns_frames(
         if bottom > h: bottom = h; top = max(0, h - crop_h)
         if left < 0: left = 0
         if top < 0: top = 0
-        
+
         final_crop_w = right - left
         final_crop_h = bottom - top
 
@@ -375,10 +375,10 @@ def generate_ken_burns_frames(
         else:
             cropped = img_base.crop((left, top, right, bottom))
             frame_image = cropped.resize((video_width, video_height), Image.Resampling.LANCZOS)
-        
+
         frame_filename = os.path.join(output_frames_dir, f"frame_{i:05d}.png")
         frame_image.save(frame_filename)
-        
+
     return num_frames
 
 # 3. Função para criar vídeo a partir de frames usando ffmpeg
@@ -417,7 +417,7 @@ def get_video_duration(path):
         "ffprobe", "-v", "error", "-show_entries",
         "format=duration", "-of", "json", path
     ], capture_output=True, text=True)
-    
+
     data = json.loads(result.stdout)
     return float(data["format"]["duration"])
 
@@ -431,7 +431,7 @@ def redimensionar_video(input_path, output_path, largura, altura):
         output_path
     ]
     subprocess.run(comando, check=True)
-    
+
 
 def adicionar_texto_e_imagem_sem_imagens_sobreposta(
     input_video,
@@ -505,7 +505,7 @@ def adicionar_texto_e_imagem_sem_imagens_sobreposta(
     print("Executando FFmpeg:")
     print(" ".join(comando))
     subprocess.run(comando, check=True)
-    
+
 
 def adicionar_camadas_ao_video_base(
     video_base_path,
@@ -599,10 +599,10 @@ def adicionar_camadas_ao_video_base(
         print("Comando:", e.cmd)
         print("Output:", e.stdout)
         print("Error:", e.stderr)
-    
+
 # Exemplo de uso
 if __name__ == "__main__":
-    
+
     print("Carregando imagens e metadados...")
     image_data = []
     for filename in sorted(os.listdir(PROCESSED_DIR)):
@@ -636,39 +636,39 @@ if __name__ == "__main__":
 
     # Ordena por tempo de início
     image_data.sort(key=lambda x: x["start"])
-    
+
     clips = []
-    
+
     # --- ÁUDIO ---
     print("Gerando áudio...")
     try:
         criar_audio_com_ducking()
     except Exception as e_audio:
         print(f"Erro ao gerar áudio: {e_audio}")
-        
+
     with open("C:/Users/souza/Downloads/VideoCreator/data/intervalos_entre_camadas.json", 'r', encoding="utf-8") as f:
         intervalos_camadas = json.load(f)
-    
+
     with open("C:/Users/souza/Downloads/VideoCreator/data/camadas.json", 'r', encoding="utf-8") as f:
         camadas_tempos = json.load(f)
-        
+
     with open("C:/Users/souza/Downloads/VideoCreator/data/topicos.json", 'r', encoding="utf-8") as f:
         topicos_tempos = json.load(f)
-        
+
     with open("C:/Users/souza/Downloads/VideoCreator/data/intervalos_entre_topicos.json", 'r', encoding="utf-8") as f:
         intervalo_entre_topicos_tempos = json.load(f)
-    
-         
+
+
     # --- CAMADAS ---
     for i, camada in enumerate(camadas_tempos):
         camada_formatada = "camada_" + camada["word"].lower().replace(' ', '_')
-        
+
         #camada_formatada = "camada_" + camada["word"].lower().replace(' ', '_')
         texto = unicodedata.normalize('NFD', camada["word"])
         texto = ''.join([c for c in texto if unicodedata.category(c) != 'Mn'])
         texto = re.sub(r'[^a-zA-Z0-9\s]', '', texto)
         camada_formatada = texto.lower().replace(' ', '_')
-        
+
         path_video_editado = f"C:/Users/souza/Downloads/VideoCreator/assets/videos/camadas/editadas/{camada_formatada}.mp4"
         video_duracao = get_video_duration(camada["video_path_base"])
         duracao_intervalo = camada["end"] - camada["start"]
@@ -687,7 +687,7 @@ if __name__ == "__main__":
             imagem_altura=200,
             distancia_texto_imagem=20
         )
-        
+
         camada_obj = {
                 "arquivo": path_video_editado,
                 "inicio": camada["start"],
@@ -698,11 +698,11 @@ if __name__ == "__main__":
                 "altura": VIDEO_HEIGHT,
                 "loop": video_duracao < duracao_intervalo
             }
-        
+
         clips.append(camada_obj)
-            
-        
-    # --- RENDER ---    
+
+
+    # --- RENDER ---
     adicionar_camadas_ao_video_base(
         video_base_path="C:/Users/souza/Downloads/VideoCreator/assets/videos/video_exemplo_final.mp4",
         camadas=clips,

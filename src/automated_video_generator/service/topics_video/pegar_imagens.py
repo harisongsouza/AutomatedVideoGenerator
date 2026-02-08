@@ -5,6 +5,7 @@ import shutil
 import time
 import unicodedata
 import uuid  # Para gerar nomes únicos para o backup
+from pathlib import Path
 
 def remover_acentos(texto):
     remover = "´^~\"'"  # Adiciona aspas duplas (") e simples (')
@@ -12,10 +13,10 @@ def remover_acentos(texto):
         c for c in unicodedata.normalize('NFKD', texto)
         if not unicodedata.combining(c) and c not in remover
     )
-    
+
 def executar_script_powershell(caminho_script, argumento=None):
     comando = ["powershell", "-ExecutionPolicy", "Bypass", "-File", caminho_script]
-    
+
     if argumento:
         comando.append(argumento)
 
@@ -27,7 +28,7 @@ def executar_script_powershell(caminho_script, argumento=None):
             text=True
         )
         print(f" ✅ Script '{caminho_script}' executado com sucesso!")
-        
+
         path_line = None
         for line in resultado.stdout.splitlines():
             line = line.strip()
@@ -35,14 +36,17 @@ def executar_script_powershell(caminho_script, argumento=None):
                 path_line = line
                 break
 
-        if caminho_script == "C:/Users/souza/Videos/VideoCreator/utils/download_images_from_links_file.ps1":
+        BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+        if caminho_script == BASE_DIR / "utils" / "download_images_from_links_file.ps1":
+
             if path_line:
                 try:
                     output_dict = json.loads(path_line)
                     if 'Path' in output_dict:
                         caminho_imagem = output_dict['Path']
                         print(f"Caminho Completo Imagem: {caminho_imagem}")
-                        data_to_save = {'path_da_imagem': caminho_imagem.replace("\\", "/")}                          
+                        data_to_save = {'path_da_imagem': caminho_imagem.replace("\\", "/")}
                         return data_to_save
                     else:
                         print(" ❌ Chave 'Path' não encontrada na linha de saída.")
@@ -76,7 +80,7 @@ def deletar_arquivo_downloads(nome_arquivo):
 
     except Exception as e:
         print(f"Ocorreu um erro ao deletar o arquivo: {e}")
-        
+
 
 def deletar_e_recriar_pasta_preservando_subpasta_seguro(caminho_pasta_principal: str, nome_da_pasta_a_preservar: str):
 
@@ -178,9 +182,9 @@ def deletar_e_recriar_pasta_preservando_subpasta_seguro(caminho_pasta_principal:
             print(f"ALERTA DE INCONSISTÊNCIA: O local de backup '{caminho_backup_temporario}' existe, mas a flag interna "
                   f"indica que a subpasta não deveria estar lá. Isso é altamente inesperado. "
                   f"Por favor, VERIFIQUE o conteúdo de '{caminho_backup_temporario}' CUIDADOSAMENTE.")
-                  
-                 
-                 
+
+
+
 
 def verificar_arquivo_e_string(nome_arquivo, string_procurada):
     pasta_downloads = os.path.join(os.path.expanduser("~"), "Downloads")
@@ -203,45 +207,46 @@ def verificar_arquivo_e_string(nome_arquivo, string_procurada):
         print(f"Arquivo '{nome_arquivo}' não foi criado, e não existe na pasta Downloads.")
         time.sleep(5)  # Espera por 5 segundos antes de verificar novamente
         return False
-       
-              
+
+
 def main():
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     # Caminhos dos scripts
-    script1 = r"C:/Users/souza/Videos/VideoCreator/utils/duckduckgo.ps1"
-    script2 = r"C:/Users/souza/Videos/VideoCreator/utils/download_images_from_links_file.ps1"
-        
+    script1 = BASE_DIR / "utils" / "duckduckgo.ps1"
+    script2 = BASE_DIR / "utils" / "download_images_from_links_file.ps1"
+
     # Caminhos dos arquivos
-    entrada_path = "C:/Users/souza/Videos/VideoCreator/data/video_final_com_buscas.json"
+    entrada_path = BASE_DIR / "data" / "topics_video" / "video_final_com_buscas.json"
 
     # Carregar os intervalos entre tópicos
     with open(entrada_path, "r", encoding="utf-8") as f:
         termos_chaves = json.load(f)
-    
-    pasta_para_manipular = r"C:/Users/souza/Videos/VideoCreator/assets/imagens"
+
+    pasta_para_manipular = BASE_DIR / "assets" / "topics_video" / "imagens"
     pasta_preservar = r"imagens_camadas"
     deletar_e_recriar_pasta_preservando_subpasta_seguro(pasta_para_manipular, pasta_preservar)
-    
+
     for topico_intervalo in termos_chaves:
         for images in topico_intervalo["imagens"]:
             frase_de_busca_original = images["frase_de_busca"]
             frase_dita = images["frase_dita"]
             frase_de_busca = remover_acentos(frase_de_busca_original)
             resultado = False
-            
+
             while resultado is False:
                 print("\n#################################################")
-                deletar_arquivo_downloads("urls.txt")                                         
+                deletar_arquivo_downloads("urls.txt")
                 # Executar os scripts
                 print(f"FRASE: {frase_dita}")
                 frase_de_busca_modificada = frase_de_busca.replace(" ", "_")
                 print(f"NOME: {frase_de_busca_modificada.lower()}")
-                
+
                 executar_script_powershell(script1, frase_de_busca)
-                                
+
                 nome_do_arquivo = "urls.txt"  # Substitua pelo nome real do seu arquivo
                 string_para_buscar = "https://"
                 resultado = verificar_arquivo_e_string(nome_do_arquivo, string_para_buscar)
-                
+
                 if resultado:
                     path_file = executar_script_powershell(script2, frase_de_busca)
                     if path_file is None or path_file.get("path_da_imagem") == "None":
@@ -249,24 +254,25 @@ def main():
                     else:
                         images["path"] = path_file["path_da_imagem"]
                 print("#################################################\n")
-                
-    saida_path = "C:/Users/souza/Videos/VideoCreator/data/add_img_path_img_interv.json"
+
+    saida_path = BASE_DIR / "data" / "topics_video" / "add_img_path_img_interv.json"
+
     # Salva em arquivo
     with open(saida_path, "w", encoding="utf-8") as f:
         json.dump(termos_chaves, f, ensure_ascii=False, indent=2)
-   
-        
+
+
     """ saida_path_2 = "C:/Users/souza/Videos/VideoCreator/data/add_img_path_img_interv_SHORTS.json"
     ci = []
     for dd in termos_chaves:
         if dd["camada"] == "intervalo_camada_gelo_profundo":
-            ci.append(dd)    
+            ci.append(dd)
     # Salva em arquivo
     with open(saida_path_2, "w", encoding="utf-8") as f:
         json.dump(ci, f, ensure_ascii=False, indent=2) """
-        
+
     print("CODIGO FINALIZADO!")
-    
-    
+
+
 if __name__ == "__main__":
     main()

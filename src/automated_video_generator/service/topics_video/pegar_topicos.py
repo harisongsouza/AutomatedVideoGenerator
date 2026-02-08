@@ -3,6 +3,8 @@ import unicodedata
 import re
 from rapidfuzz.fuzz import ratio
 from thefuzz import fuzz
+from pathlib import Path
+
 
 """ def extrair_topicos_do_arquivo(caminho_do_arquivo):
     topicos_encontrados = []
@@ -26,15 +28,15 @@ def extrair_topicos_do_arquivo(caminho_do_arquivo):
     try:
         with open(caminho_do_arquivo, 'r', encoding='utf-8') as arquivo:
             conteudo = arquivo.read()
-            
+
             # Expressão regular modificada para encontrar um dos dois padrões:
             # 1. "Número \d+\. .*?\." -> Para "Número X. Tema."
             # 2. "Espero que tenham gostado\." -> Para a frase exata
             # O operador "|" funciona como um "OU"
             padrao = r"(Número\s\d+\.\s.*?\.)|(Espero que tenham gostado\.)"
-            
+
             topicos_encontrados = re.findall(padrao, conteudo)
-            
+
             # re.findall com grupos de captura (usando parênteses) retorna uma
             # lista de tuplas. Precisamos achatar a lista para ter um resultado simples.
             topicos_encontrados = [item for tupla in topicos_encontrados for item in tupla if item]
@@ -43,12 +45,14 @@ def extrair_topicos_do_arquivo(caminho_do_arquivo):
         print(f"Erro: O arquivo '{caminho_do_arquivo}' não foi encontrado.")
     except Exception as e:
         print(f"Ocorreu um erro ao ler o arquivo: {e}")
-        
+
     return topicos_encontrados
 
-json_path = "C:/Users/souza/Videos/VideoCreator/data/transcription_words.json"
-saida_path = "C:/Users/souza/Videos/VideoCreator/data/topicos.json"
-limiar_similaridade = 75  
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+json_path = BASE_DIR / "data" / "topics_video" / "transcription.json"
+saida_path = BASE_DIR / "data" / "topics_video" / "topicos.json"
+
+limiar_similaridade = 75
 
 #criar funcao regex para pegar topicos do roteiro de forma automatica.
 """ frases_alvo = [
@@ -69,7 +73,7 @@ limiar_similaridade = 75
     "Número 3. O desenho maldito de 1984."
 ] """
 
-""" 
+"""
 def normalizar(texto):
     "Remove acentos, pontuação, caixa alta e espaços extras."
     texto = ''.join(
@@ -127,7 +131,7 @@ def encontrar_melhor_correspondencia(transcricao, frases_alvo, limiar=80):
 
         frase_alvo_normalizada = normalizar(frase_alvo)
         num_palavras_alvo = len(frase_alvo.split())
-        
+
         if len(palavras_transcricao) < num_palavras_alvo:
             continue
 
@@ -144,18 +148,18 @@ def encontrar_melhor_correspondencia(transcricao, frases_alvo, limiar=80):
             if similaridade > maior_similaridade and similaridade >= limiar:
                 # ...atualizamos a nossa melhor correspondência.
                 maior_similaridade = similaridade
-                
+
                 # Determina o 'end_time' corretamente
                 end_time_calculado = None
                 indice_palavra_seguinte = i + num_palavras_alvo # 'num_palavras_alvo' é o número de palavras na frase_alvo
-                
+
                 if indice_palavra_seguinte < len(palavras_transcricao):
                     # Se houver uma próxima palavra, 'end' é o 'start' dela
                     end_time_calculado = palavras_transcricao[indice_palavra_seguinte]["start"]
                 else:
                     # Se for o final da transcrição, 'end' é o 'end' da última palavra do bloco
                     end_time_calculado = bloco[-1]["end"]
-                
+
                 melhor_match = {
                     "word": frase_alvo,
                     "start": bloco[0]["start"],
@@ -170,10 +174,11 @@ def encontrar_melhor_correspondencia(transcricao, frases_alvo, limiar=80):
             resultados_finais.append(melhor_match)
 
     return resultados_finais
- 
+
 
 def main():
-    frases_alvo = extrair_topicos_do_arquivo("C:/Users/souza/Videos/VideoCreator/data/roteiro.txt")
+    frases_alvo = BASE_DIR / "data" / "topics_video" / "roteiro.txt"
+
     with open(json_path, "r", encoding="utf-8") as f:
         transcricao = json.load(f)
 
@@ -182,11 +187,11 @@ def main():
     #print(resultados)
     #tem que descartar os termos que nao tem os "numero 1." antes deles, e manter só o que tem.
     #isso nao esta sendo feito.
-    
+
     # Salva em arquivo
     with open(saida_path, "w", encoding="utf-8") as f:
         json.dump(resultados, f, ensure_ascii=False, indent=2)
-        
-        
-if __name__ == "__main__": 
+
+
+if __name__ == "__main__":
     main()

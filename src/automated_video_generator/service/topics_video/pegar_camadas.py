@@ -2,11 +2,13 @@ import json
 import unicodedata
 import re
 from rapidfuzz.fuzz import ratio
+from pathlib import Path
 
 def main():
     # === CONFIGURAÇÃO ===
     # Caminho para o JSON
-    json_path = "C:/Users/souza/Downloads/VideoCreator/data/transcription_words.json"
+    BASE_DIR_TRANSCRIPTION = Path(__file__).resolve().parent.parent.parent
+    json_path = BASE_DIR_TRANSCRIPTION / "data" / "topics_video" / "transcription.json"
 
     # Lista de frases que você quer encontrar
     frases_alvo = [
@@ -81,11 +83,11 @@ def main():
                             # Se a frase encontrada é a última parte da transcrição,
                             # usa o "end" da última palavra do bloco
                             end_time = bloco[-1]["end"]
-                    
+
                     # Garante que end_time tenha um valor (fallback para o final da última palavra do bloco se algo der errado)
                     if end_time is None:
                         end_time = bloco[-1]["end"]
-                    
+
                     resultados.append({
                         "word": frase_alvo,
                         "start": bloco[0]["start"],

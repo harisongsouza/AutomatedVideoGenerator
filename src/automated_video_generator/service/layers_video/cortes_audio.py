@@ -1,13 +1,16 @@
 import os
 import json
 # O módulo tempfile não será mais usado para criar o arquivo, mas o deixamos caso precise no futuro.
-import tempfile 
+import tempfile
 from pydub import AudioSegment
 from faster_whisper import WhisperModel
 import time
+from pathlib import Path
 
 # --- Configurações ---
-AUDIO_FILE_PATH = "C:/Users/souza/Downloads/VideoCreator/assets/audio/narracao.wav" 
+BASE_DIR_AUDIO = Path(__file__).resolve().parent.parent.parent
+AUDIO_FILE_PATH = BASE_DIR_AUDIO / "assets" / "topics_video" / "audio" / "narracao.wav"
+
 MODEL_SIZE = "medium"
 COMPUTE_TYPE = "float32"
 CHUNK_LENGTH_MS = 30 * 1000
@@ -26,7 +29,7 @@ def transcribe_audio_in_chunks(audio_path):
 
     print("--- Iniciando a transcrição ---")
     print(f"Carregando o modelo Whisper '{MODEL_SIZE}'...")
-    
+
     try:
         model = WhisperModel(MODEL_SIZE, device="cpu", compute_type=COMPUTE_TYPE)
     except Exception as e:
@@ -43,7 +46,7 @@ def transcribe_audio_in_chunks(audio_path):
 
     total_duration_ms = len(audio)
     chunks = range(0, total_duration_ms, CHUNK_LENGTH_MS)
-    
+
     final_segments = []
     full_text = ""
     language_info = None
@@ -55,23 +58,23 @@ def transcribe_audio_in_chunks(audio_path):
     for i, start_ms in enumerate(chunks):
         end_ms = start_ms + CHUNK_LENGTH_MS
         end_ms = min(end_ms, total_duration_ms)
-        
+
         audio_chunk = audio[start_ms:end_ms]
         offset_seconds = start_ms / 1000.0
 
         # --- MUDANÇA PRINCIPAL: Em vez de usar tempfile, criamos o arquivo na nossa pasta ---
         temp_chunk_filename = os.path.join(TEMP_CHUNK_DIR, f"chunk_{i}.mp3")
-        
+
         try:
             # Exporta o chunk para o nosso caminho definido
             audio_chunk.export(temp_chunk_filename, format="mp3")
-            
+
             # Transcreve o chunk
             segments, info = model.transcribe(temp_chunk_filename, word_timestamps=True)
 
             if language_info is None:
                 language_info = info
-            
+
             for segment in segments:
                 full_text += segment.text + " "
                 corrected_start = segment.start + offset_seconds
@@ -99,7 +102,7 @@ def transcribe_audio_in_chunks(audio_path):
                     "words": corrected_words
                 })
                 segment_id_counter += 1
-        
+
         finally:
             # --- BOA PRÁTICA: Garante que o arquivo temporário seja deletado mesmo se ocorrer um erro ---
             if os.path.exists(temp_chunk_filename):
@@ -114,7 +117,9 @@ def transcribe_audio_in_chunks(audio_path):
         "language_probability": language_info.language_probability if language_info else 0.0
     }
 
-    output_filename = "C:/Users/souza/Downloads/VideoCreator/data/transcription.json"
+    BASE_DIR_DADOS = Path(__file__).resolve().parent.parent.parent
+    output_filename = BASE_DIR_DADOS / "data" / "topics_video" / "transcription.json"
+
     with open(output_filename, "w", encoding="utf-8") as f:
         json.dump(final_transcription, f, indent=2, ensure_ascii=False)
 
@@ -128,6 +133,6 @@ def transcribe_audio_in_chunks(audio_path):
 # --- Executar o script ---
 def main():
     transcribe_audio_in_chunks(AUDIO_FILE_PATH)
-    
+
 if __name__ == "__main__":
     main()

@@ -3,6 +3,7 @@ import cv2 # OpenCV para detecção de rosto
 import numpy as np
 from PIL import Image, ImageFilter, UnidentifiedImageError
 import json # Para salvar metadados
+from pathlib import Path
 
 # --- Configurações ---
 TARGET_WIDTH = 1920
@@ -16,10 +17,10 @@ VERY_SMALL_THRESHOLD_H = TARGET_HEIGHT * 0.4
 
 # Caminho para o classificador Haar Cascade (ajuste se necessário)
 # MODIFICADO para usar o caminho padrão do OpenCV para melhor portabilidade
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR_FILES = os.path.dirname(os.path.abspath(__file__))
 
 # Monta o caminho completo para o XML que agora está no build
-HAAR_CASCADE_PATH = os.path.join(BASE_DIR, "haarcascade_frontalface_default.xml")
+HAAR_CASCADE_PATH = os.path.join(BASE_DIR_FILES, "haarcascade_frontalface_default.xml")
 
 # Força do blur para o fundo (ajuste o raio)
 BLUR_RADIUS = 50
@@ -27,8 +28,10 @@ BLUR_RADIUS = 50
 BACKGROUND_COLOR = (0, 0, 0) # Preto para letterbox/pillarbox
 
 # Diretórios (mantenha ou ajuste)
-INPUT_IMAGE_DIR = "C:/Users/souza/Videos/VideoCreator/assets/imagens"
-OUTPUT_IMAGE_DIR = "C:/Users/souza/Videos/VideoCreator/assets/imagens/imagens_processadas"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+INPUT_IMAGE_DIR = BASE_DIR / "assets" / "topics_video" / "imagens"
+OUTPUT_IMAGE_DIR = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
+
 os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
 
 # Carregar o classificador de rosto
@@ -169,7 +172,7 @@ def process_and_validate_image_revised(image_path, output_dir):
                 if focal_point_on_target_canvas else [TARGET_WIDTH // 2, TARGET_HEIGHT // 2]
             }
 
-            json_path = "C:/Users/souza/Videos/VideoCreator/data/add_img_path_img_interv.json"
+            json_path = BASE_DIR / "data" / "topics_video" / "add_img_path_img_interv.json"
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
                     tra = json.load(f)
@@ -218,7 +221,7 @@ def process_and_validate_image_revised(image_path, output_dir):
 
 # --- Execução Principal (mantida sem alterações) ---
 def main():
-    pasta_destino = r"C:/Users/souza/Videos/VideoCreator/assets/imagens/imagens_processadas"
+    pasta_destino = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
     os.makedirs(pasta_destino, exist_ok=True)
 
     valid_image_paths = []

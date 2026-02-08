@@ -1,10 +1,14 @@
 from faster_whisper import WhisperModel
 import json
+from pathlib import Path
 
 def main():
-    with open("C:/Users/souza/Videos/VideoCreator/data/transcription.json", 'r', encoding="utf-8") as f:
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    arquivo_transcricao = BASE_DIR / "data" / "topics_video" / "transcription.json"
+
+    with open(arquivo_transcricao, 'r', encoding="utf-8") as f:
         intervalos = json.load(f)
-    
+
     # Caminho do arquivo de áudio
     #audio_path = "C:/Users/souza/Downloads/VideoCreator/assets/audio/narracao.wav"
 
@@ -28,8 +32,8 @@ def main():
                 "end": word["end"]
             })
 
-    # Salva em um arquivo JSON 
-    with open("C:/Users/souza/Videos/VideoCreator/data/transcription_words.json", "w", encoding="utf-8") as f:
+    # Salva em um arquivo JSON
+    with open(arquivo_transcricao, "w", encoding="utf-8") as f:
         json.dump(words_data, f, ensure_ascii=False, indent=2)
 
     print("✅ Transcrição salva em 'transcription_words.json'")

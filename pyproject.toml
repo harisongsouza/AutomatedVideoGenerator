@@ -67,4 +67,4 @@ select = [
 package = true
 
 [tool.setuptools.package-data]
-"*" = ["*.xml"]
+"*" = ["*.xml", "*.txt", "*.json"]

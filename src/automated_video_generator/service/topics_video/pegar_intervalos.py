@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 def gerar_intervalos_entre_topicos(transcricao, topicos):
     """
@@ -10,7 +11,7 @@ def gerar_intervalos_entre_topicos(transcricao, topicos):
         return []
 
     intervalos = []
-    
+
     # Ordena a transcrição e os tópicos para garantir a sequência correta
     palavras_ordenadas = sorted(transcricao, key=lambda x: x["start"])
     topicos_ordenados = sorted(topicos, key=lambda t: t["start"])
@@ -31,17 +32,17 @@ def gerar_intervalos_entre_topicos(transcricao, topicos):
     for i in range(len(topicos_ordenados) - 1):
         topico_atual = topicos_ordenados[i]
         proximo_topico = topicos_ordenados[i+1]
-        
+
         start_intervalo = topico_atual["end"]
         end_intervalo = proximo_topico["start"]
-        
+
         if start_intervalo < end_intervalo:
             intervalos.append({
                 "nome": topico_atual['word'].lower().replace(' ', '_').replace('.', ''),
                 "start": start_intervalo,
                 "end": end_intervalo
             })
-    
+
     # 3. Intervalo de conclusão: do fim do último tópico ao fim da transcrição
     ultimo_topico_end = topicos_ordenados[-1]["end"]
     if ultimo_topico_end < fim_total:
@@ -55,16 +56,17 @@ def gerar_intervalos_entre_topicos(transcricao, topicos):
 
 
 def main():
-    path_transcricao = "C:/Users/souza/Videos/VideoCreator/data/transcription_words.json"
-    path_topicos = "C:/Users/souza/Videos/VideoCreator/data/topicos.json"
-    path_saida = "C:/Users/souza/Videos/VideoCreator/data/intervalos_entre_topicos.json"
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    path_transcricao = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
+    path_topicos = BASE_DIR / "data" / "topics_video" / "topicos.json"
+    path_saida = BASE_DIR / "data" / "topics_video" / "intervalos_entre_topicos.json"
 
     with open(path_transcricao, "r", encoding="utf-8") as f:
         transcricao = json.load(f)
-    
+
     with open(path_topicos, "r", encoding="utf-8") as f:
         topicos = json.load(f)
-        
+
     intervalos_topicos = gerar_intervalos_entre_topicos(transcricao, topicos)
 
     # Salva o resultado final
