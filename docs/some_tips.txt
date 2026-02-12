@@ -238,3 +238,8 @@ Para executar codigo python
 - cd src (pois o python não enxerga a src (não tem __init__.py))
 - python -m automated_video_generator.cli
 
+
+
+
+
+Você precisa ter o ffmpeg instalado no sistema. (para converter .gif para .mp4)

@@ -1,0 +1,1655 @@
+{
+  "text": "Invocação do Mal estreou em 2013 e trouxe para o cinema uma história baseada em eventos  reais investigados pelos famosos.  Número 5 Inspirado em eventos reais  O filme é baseado no caso da família Perron, que teria vivido eventos sobrenaturais na  década de 1970.  Número 4 Ed, Lorraine e Warren participaram do filme.  Para garantir.  para garantir fidelidade à história, os próprios Eddie e Lorraine Warren atuaram como consultores no  filme. Número 3. A boneca na pele quase não aparece. Embora a boneca tenha se tornado famosa em  spin-offs e outros filmes da franquia, em Invocação do Mal. Número 2. A trilha sonora intensifica o  som. A música composta por Joseph Bichara é central para a atmosfera.  era de terror.  Número 1  Cenas assustadoras improvisadas  Muitas das reações de susto dos atores foram reais.  Espero que tenham gostado.  Essas foram 5 curiosidades sobre Invocação do Mal, 2013.  Se curtiu, deixe o like, se inscreve no canal e comenta qual outro filme de terror você  quer ver aqui.  Até a próxima!",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 6.12,
+      "text": " Invocação do Mal estreou em 2013 e trouxe para o cinema uma história baseada em eventos",
+      "tokens": [
+        50364,
+        682,
+        3080,
+        496,
+        2917,
+        360,
+        5746,
+        36665,
+        263,
+        846,
+        9012,
+        308,
+        3455,
+        36949,
+        1690,
+        277,
+        17178,
+        2772,
+        20670,
+        3096,
+        1538,
+        846,
+        2280,
+        329,
+        50660
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " Invocação",
+          "start": 0.0,
+          "end": 1.06,
+          "probability": 0.9050970375537872
+        },
+        {
+          "word": " do",
+          "start": 1.06,
+          "end": 1.24,
+          "probability": 0.936587393283844
+        },
+        {
+          "word": " Mal",
+          "start": 1.24,
+          "end": 1.4,
+          "probability": 0.515876054763794
+        },
+        {
+          "word": " estreou",
+          "start": 1.4,
+          "end": 1.92,
+          "probability": 0.858061283826828
+        },
+        {
+          "word": " em",
+          "start": 1.92,
+          "end": 2.1,
+          "probability": 0.9908424615859985
+        },
+        {
+          "word": " 2013",
+          "start": 2.1,
+          "end": 2.84,
+          "probability": 0.9364424347877502
+        },
+        {
+          "word": " e",
+          "start": 2.84,
+          "end": 2.98,
+          "probability": 0.8464661240577698
+        },
+        {
+          "word": " trouxe",
+          "start": 2.98,
+          "end": 3.38,
+          "probability": 0.9986837804317474
+        },
+        {
+          "word": " para",
+          "start": 3.38,
+          "end": 3.6,
+          "probability": 0.9924256801605225
+        },
+        {
+          "word": " o",
+          "start": 3.6,
+          "end": 3.78,
+          "probability": 0.9905998110771179
+        },
+        {
+          "word": " cinema",
+          "start": 3.78,
+          "end": 4.04,
+          "probability": 0.9948567152023315
+        },
+        {
+          "word": " uma",
+          "start": 4.04,
+          "end": 4.36,
+          "probability": 0.9910961389541626
+        },
+        {
+          "word": " história",
+          "start": 4.36,
+          "end": 4.68,
+          "probability": 0.9763235449790955
+        },
+        {
+          "word": " baseada",
+          "start": 4.68,
+          "end": 5.3,
+          "probability": 0.9493617713451385
+        },
+        {
+          "word": " em",
+          "start": 5.3,
+          "end": 5.56,
+          "probability": 0.9975771307945251
+        },
+        {
+          "word": " eventos",
+          "start": 5.56,
+          "end": 6.12,
+          "probability": 0.9950177073478699
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 6.12,
+      "end": 9.28,
+      "text": " reais investigados pelos famosos.",
+      "tokens": [
+        50660,
+        34823,
+        4557,
+        4181,
+        38304,
+        1087,
+        33894,
+        13,
+        50858
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " reais",
+          "start": 6.12,
+          "end": 6.38,
+          "probability": 0.9971460700035095
+        },
+        {
+          "word": " investigados",
+          "start": 6.38,
+          "end": 7.36,
+          "probability": 0.9954520463943481
+        },
+        {
+          "word": " pelos",
+          "start": 7.36,
+          "end": 7.64,
+          "probability": 0.9698342084884644
+        },
+        {
+          "word": " famosos.",
+          "start": 7.64,
+          "end": 9.28,
+          "probability": 0.993972510099411
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 9.5,
+      "end": 13.62,
+      "text": " Número 5 Inspirado em eventos reais",
+      "tokens": [
+        50858,
+        426,
+        2481,
+        936,
+        78,
+        1025,
+        32671,
+        347,
+        1573,
+        846,
+        2280,
+        329,
+        34823,
+        51092
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " Número",
+          "start": 9.5,
+          "end": 10.02,
+          "probability": 0.8434454128146172
+        },
+        {
+          "word": " 5",
+          "start": 10.02,
+          "end": 11.34,
+          "probability": 0.8713786602020264
+        },
+        {
+          "word": " Inspirado",
+          "start": 11.34,
+          "end": 12.26,
+          "probability": 0.8490131894747416
+        },
+        {
+          "word": " em",
+          "start": 12.26,
+          "end": 12.46,
+          "probability": 0.9905937910079956
+        },
+        {
+          "word": " eventos",
+          "start": 12.46,
+          "end": 13.04,
+          "probability": 0.944696843624115
+        },
+        {
+          "word": " reais",
+          "start": 13.04,
+          "end": 13.62,
+          "probability": 0.9885345101356506
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 14.56,
+      "end": 20.18,
+      "text": " O filme é baseado no caso da família Perron, que teria vivido eventos sobrenaturais na",
+      "tokens": [
+        51092,
+        422,
+        26488,
+        1136,
+        3096,
+        1573,
+        572,
+        9666,
+        1120,
+        26716,
+        3026,
+        2044,
+        11,
+        631,
+        45530,
+        23603,
+        78,
+        2280,
+        329,
+        18253,
+        1095,
+        19493,
+        1527,
+        1667,
+        51366
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " O",
+          "start": 14.379999999999999,
+          "end": 14.78,
+          "probability": 0.7246373891830444
+        },
+        {
+          "word": " filme",
+          "start": 14.78,
+          "end": 15.1,
+          "probability": 0.9982219338417053
+        },
+        {
+          "word": " é",
+          "start": 15.1,
+          "end": 15.36,
+          "probability": 0.9958927631378174
+        },
+        {
+          "word": " baseado",
+          "start": 15.36,
+          "end": 15.82,
+          "probability": 0.9943903088569641
+        },
+        {
+          "word": " no",
+          "start": 15.82,
+          "end": 15.98,
+          "probability": 0.9782963991165161
+        },
+        {
+          "word": " caso",
+          "start": 15.98,
+          "end": 16.3,
+          "probability": 0.9975760579109192
+        },
+        {
+          "word": " da",
+          "start": 16.3,
+          "end": 16.56,
+          "probability": 0.9957098960876465
+        },
+        {
+          "word": " família",
+          "start": 16.56,
+          "end": 16.94,
+          "probability": 0.9708135724067688
+        },
+        {
+          "word": " Perron,",
+          "start": 16.94,
+          "end": 17.38,
+          "probability": 0.8614936470985413
+        },
+        {
+          "word": " que",
+          "start": 17.78,
+          "end": 17.86,
+          "probability": 0.9970002770423889
+        },
+        {
+          "word": " teria",
+          "start": 17.86,
+          "end": 18.2,
+          "probability": 0.9960675239562988
+        },
+        {
+          "word": " vivido",
+          "start": 18.2,
+          "end": 18.68,
+          "probability": 0.9894362390041351
+        },
+        {
+          "word": " eventos",
+          "start": 18.68,
+          "end": 19.18,
+          "probability": 0.997773289680481
+        },
+        {
+          "word": " sobrenaturais",
+          "start": 19.18,
+          "end": 20.0,
+          "probability": 0.992011621594429
+        },
+        {
+          "word": " na",
+          "start": 20.0,
+          "end": 20.18,
+          "probability": 0.9963313937187195
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 20.18,
+      "end": 22.38,
+      "text": " década de 1970.",
+      "tokens": [
+        51366,
+        9198,
+        1538,
+        368,
+        14577,
+        13,
+        51558
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " década",
+          "start": 20.18,
+          "end": 20.64,
+          "probability": 0.9969415068626404
+        },
+        {
+          "word": " de",
+          "start": 20.64,
+          "end": 20.9,
+          "probability": 0.9989950060844421
+        },
+        {
+          "word": " 1970.",
+          "start": 20.9,
+          "end": 22.38,
+          "probability": 0.9848878383636475
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 23.779999999999998,
+      "end": 28.3,
+      "text": " Número 4 Ed, Lorraine e Warren participaram do filme.",
+      "tokens": [
+        51558,
+        426,
+        2481,
+        936,
+        78,
+        1017,
+        3977,
+        11,
+        29358,
+        11798,
+        308,
+        20538,
+        3421,
+        12835,
+        360,
+        26488,
+        13,
+        51840
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.15721548736095428,
+      "compression_ratio": 1.424778761061947,
+      "no_speech_prob": 0.0035905803088098764,
+      "words": [
+        {
+          "word": " Número",
+          "start": 23.779999999999998,
+          "end": 24.58,
+          "probability": 0.9950030148029327
+        },
+        {
+          "word": " 4",
+          "start": 24.58,
+          "end": 25.38,
+          "probability": 0.9956142902374268
+        },
+        {
+          "word": " Ed,",
+          "start": 25.38,
+          "end": 25.94,
+          "probability": 0.7098349332809448
+        },
+        {
+          "word": " Lorraine",
+          "start": 26.0,
+          "end": 26.46,
+          "probability": 0.8989958167076111
+        },
+        {
+          "word": " e",
+          "start": 26.46,
+          "end": 26.56,
+          "probability": 0.9897300004959106
+        },
+        {
+          "word": " Warren",
+          "start": 26.56,
+          "end": 26.88,
+          "probability": 0.884922444820404
+        },
+        {
+          "word": " participaram",
+          "start": 26.88,
+          "end": 27.66,
+          "probability": 0.9786335825920105
+        },
+        {
+          "word": " do",
+          "start": 27.66,
+          "end": 27.88,
+          "probability": 0.9980042576789856
+        },
+        {
+          "word": " filme.",
+          "start": 27.88,
+          "end": 28.3,
+          "probability": 0.9981753826141357
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2830,
+      "start": 28.3,
+      "end": 29.98,
+      "text": " Para garantir.",
+      "tokens": [
+        50412,
+        11107,
+        22251,
+        347,
+        13,
+        50448
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.9578316552298409,
+      "compression_ratio": 0.7,
+      "no_speech_prob": 0.40167614817619324,
+      "words": [
+        {
+          "word": " Para",
+          "start": 28.3,
+          "end": 29.6,
+          "probability": 0.5378471612930298
+        },
+        {
+          "word": " garantir.",
+          "start": 29.6,
+          "end": 29.98,
+          "probability": 0.9219677746295929
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 0,
+      "start": 30.0,
+      "end": 35.74,
+      "text": " para garantir fidelidade à história, os próprios Eddie e Lorraine Warren atuaram como consultores no",
+      "tokens": [
+        50364,
+        1690,
+        22251,
+        347,
+        283,
+        16189,
+        6014,
+        1531,
+        20670,
+        11,
+        3003,
+        21431,
+        37994,
+        23911,
+        308,
+        29358,
+        11798,
+        20538,
+        412,
+        84,
+        12835,
+        2617,
+        7189,
+        2706,
+        572,
+        50668
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20769480615854263,
+      "compression_ratio": 1.4074074074074074,
+      "no_speech_prob": 0.033807460218667984,
+      "words": [
+        {
+          "word": " para",
+          "start": 30.0,
+          "end": 30.0,
+          "probability": 0.015002773143351078
+        },
+        {
+          "word": " garantir",
+          "start": 30.0,
+          "end": 30.22,
+          "probability": 0.6136130169034004
+        },
+        {
+          "word": " fidelidade",
+          "start": 30.22,
+          "end": 30.88,
+          "probability": 0.9836369355519613
+        },
+        {
+          "word": " à",
+          "start": 30.88,
+          "end": 31.12,
+          "probability": 0.9268277883529663
+        },
+        {
+          "word": " história,",
+          "start": 31.12,
+          "end": 31.48,
+          "probability": 0.9781135320663452
+        },
+        {
+          "word": " os",
+          "start": 31.82,
+          "end": 32.1,
+          "probability": 0.9613811373710632
+        },
+        {
+          "word": " próprios",
+          "start": 32.1,
+          "end": 32.56,
+          "probability": 0.9917459487915039
+        },
+        {
+          "word": " Eddie",
+          "start": 32.56,
+          "end": 32.94,
+          "probability": 0.37902167439460754
+        },
+        {
+          "word": " e",
+          "start": 32.94,
+          "end": 33.0,
+          "probability": 0.6901245713233948
+        },
+        {
+          "word": " Lorraine",
+          "start": 33.0,
+          "end": 33.5,
+          "probability": 0.9589990675449371
+        },
+        {
+          "word": " Warren",
+          "start": 33.5,
+          "end": 33.86,
+          "probability": 0.9883375763893127
+        },
+        {
+          "word": " atuaram",
+          "start": 33.86,
+          "end": 34.44,
+          "probability": 0.9523806969324747
+        },
+        {
+          "word": " como",
+          "start": 34.44,
+          "end": 34.9,
+          "probability": 0.9985151886940002
+        },
+        {
+          "word": " consultores",
+          "start": 34.9,
+          "end": 35.519999999999996,
+          "probability": 0.9942481219768524
+        },
+        {
+          "word": " no",
+          "start": 35.519999999999996,
+          "end": 35.74,
+          "probability": 0.9427707195281982
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 0,
+      "start": 35.74,
+      "end": 45.78,
+      "text": " filme. Número 3. A boneca na pele quase não aparece. Embora a boneca tenha se tornado famosa em",
+      "tokens": [
+        50668,
+        26488,
+        13,
+        426,
+        2481,
+        936,
+        78,
+        805,
+        13,
+        316,
+        9026,
+        496,
+        1667,
+        41615,
+        28875,
+        2431,
+        37863,
+        13,
+        24234,
+        3252,
+        257,
+        9026,
+        496,
+        28834,
+        369,
+        10885,
+        1573,
+        1087,
+        6447,
+        846,
+        51170
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20769480615854263,
+      "compression_ratio": 1.4074074074074074,
+      "no_speech_prob": 0.033807460218667984,
+      "words": [
+        {
+          "word": " filme.",
+          "start": 35.74,
+          "end": 36.34,
+          "probability": 0.9985509514808655
+        },
+        {
+          "word": " Número",
+          "start": 37.24,
+          "end": 37.78,
+          "probability": 0.9104180783033371
+        },
+        {
+          "word": " 3.",
+          "start": 37.78,
+          "end": 39.12,
+          "probability": 0.9164751768112183
+        },
+        {
+          "word": " A",
+          "start": 39.44,
+          "end": 39.5,
+          "probability": 0.835642397403717
+        },
+        {
+          "word": " boneca",
+          "start": 39.5,
+          "end": 39.96,
+          "probability": 0.9475682973861694
+        },
+        {
+          "word": " na",
+          "start": 39.96,
+          "end": 40.18,
+          "probability": 0.847312331199646
+        },
+        {
+          "word": " pele",
+          "start": 40.18,
+          "end": 40.44,
+          "probability": 0.0925154760479927
+        },
+        {
+          "word": " quase",
+          "start": 40.44,
+          "end": 40.9,
+          "probability": 0.9849340915679932
+        },
+        {
+          "word": " não",
+          "start": 40.9,
+          "end": 41.24,
+          "probability": 0.9971254467964172
+        },
+        {
+          "word": " aparece.",
+          "start": 41.24,
+          "end": 41.84,
+          "probability": 0.9986398816108704
+        },
+        {
+          "word": " Embora",
+          "start": 43.08,
+          "end": 43.44,
+          "probability": 0.992225706577301
+        },
+        {
+          "word": " a",
+          "start": 43.44,
+          "end": 43.66,
+          "probability": 0.9928036332130432
+        },
+        {
+          "word": " boneca",
+          "start": 43.66,
+          "end": 44.08,
+          "probability": 0.996967077255249
+        },
+        {
+          "word": " tenha",
+          "start": 44.08,
+          "end": 44.26,
+          "probability": 0.9876453280448914
+        },
+        {
+          "word": " se",
+          "start": 44.26,
+          "end": 44.54,
+          "probability": 0.9992852807044983
+        },
+        {
+          "word": " tornado",
+          "start": 44.54,
+          "end": 45.0,
+          "probability": 0.5220033284276724
+        },
+        {
+          "word": " famosa",
+          "start": 45.0,
+          "end": 45.56,
+          "probability": 0.9891279339790344
+        },
+        {
+          "word": " em",
+          "start": 45.56,
+          "end": 45.78,
+          "probability": 0.9923005104064941
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "seek": 0,
+      "start": 45.78,
+      "end": 55.08,
+      "text": " spin-offs e outros filmes da franquia, em Invocação do Mal. Número 2. A trilha sonora intensifica o",
+      "tokens": [
+        51170,
+        6060,
+        12,
+        19231,
+        308,
+        18282,
+        2007,
+        279,
+        1120,
+        431,
+        282,
+        358,
+        654,
+        11,
+        846,
+        682,
+        3080,
+        496,
+        2917,
+        360,
+        5746,
+        13,
+        426,
+        2481,
+        936,
+        78,
+        568,
+        13,
+        316,
+        26120,
+        1641,
+        1872,
+        3252,
+        14056,
+        43377,
+        277,
+        51618
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20769480615854263,
+      "compression_ratio": 1.4074074074074074,
+      "no_speech_prob": 0.033807460218667984,
+      "words": [
+        {
+          "word": " spin",
+          "start": 45.78,
+          "end": 46.08,
+          "probability": 0.8157254457473755
+        },
+        {
+          "word": "-offs",
+          "start": 46.08,
+          "end": 46.32,
+          "probability": 0.9731655418872833
+        },
+        {
+          "word": " e",
+          "start": 46.32,
+          "end": 46.620000000000005,
+          "probability": 0.9961916208267212
+        },
+        {
+          "word": " outros",
+          "start": 46.620000000000005,
+          "end": 46.980000000000004,
+          "probability": 0.9957854151725769
+        },
+        {
+          "word": " filmes",
+          "start": 46.980000000000004,
+          "end": 47.34,
+          "probability": 0.9974592328071594
+        },
+        {
+          "word": " da",
+          "start": 47.34,
+          "end": 47.58,
+          "probability": 0.9960654377937317
+        },
+        {
+          "word": " franquia,",
+          "start": 47.58,
+          "end": 48.260000000000005,
+          "probability": 0.9957820624113083
+        },
+        {
+          "word": " em",
+          "start": 48.519999999999996,
+          "end": 48.739999999999995,
+          "probability": 0.7849704623222351
+        },
+        {
+          "word": " Invocação",
+          "start": 48.739999999999995,
+          "end": 49.2,
+          "probability": 0.9298097640275955
+        },
+        {
+          "word": " do",
+          "start": 49.2,
+          "end": 49.379999999999995,
+          "probability": 0.9828505516052246
+        },
+        {
+          "word": " Mal.",
+          "start": 49.379999999999995,
+          "end": 49.760000000000005,
+          "probability": 0.6743775010108948
+        },
+        {
+          "word": " Número",
+          "start": 50.78,
+          "end": 51.32,
+          "probability": 0.99457848072052
+        },
+        {
+          "word": " 2.",
+          "start": 51.32,
+          "end": 52.120000000000005,
+          "probability": 0.9932742118835449
+        },
+        {
+          "word": " A",
+          "start": 52.86,
+          "end": 53.1,
+          "probability": 0.9956691265106201
+        },
+        {
+          "word": " trilha",
+          "start": 53.1,
+          "end": 53.44,
+          "probability": 0.9967391490936279
+        },
+        {
+          "word": " sonora",
+          "start": 53.44,
+          "end": 53.92,
+          "probability": 0.9946781396865845
+        },
+        {
+          "word": " intensifica",
+          "start": 53.92,
+          "end": 54.58,
+          "probability": 0.9986881911754608
+        },
+        {
+          "word": " o",
+          "start": 54.58,
+          "end": 55.08,
+          "probability": 0.9985923171043396
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "seek": 2508,
+      "start": 55.08,
+      "end": 59.980000000000004,
+      "text": " som. A música composta por Joseph Bichara é central para a atmosfera.",
+      "tokens": [
+        50404,
+        3307,
+        13,
+        316,
+        20091,
+        715,
+        8638,
+        1515,
+        11170,
+        363,
+        480,
+        2419,
+        1136,
+        5777,
+        1690,
+        257,
+        7722,
+        45635,
+        13,
+        50624
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.512141329901559,
+      "compression_ratio": 0.9594594594594594,
+      "no_speech_prob": 0.7479551434516907,
+      "words": [
+        {
+          "word": " som.",
+          "start": 55.08,
+          "end": 55.08,
+          "probability": 7.24575002095662e-05
+        },
+        {
+          "word": " A",
+          "start": 55.760000000000005,
+          "end": 56.32,
+          "probability": 0.8225014805793762
+        },
+        {
+          "word": " música",
+          "start": 56.32,
+          "end": 56.78,
+          "probability": 0.9722179770469666
+        },
+        {
+          "word": " composta",
+          "start": 56.78,
+          "end": 57.44,
+          "probability": 0.9349382221698761
+        },
+        {
+          "word": " por",
+          "start": 57.44,
+          "end": 57.760000000000005,
+          "probability": 0.9969249367713928
+        },
+        {
+          "word": " Joseph",
+          "start": 57.760000000000005,
+          "end": 58.16,
+          "probability": 0.703392505645752
+        },
+        {
+          "word": " Bichara",
+          "start": 58.16,
+          "end": 58.72,
+          "probability": 0.698149840037028
+        },
+        {
+          "word": " é",
+          "start": 58.72,
+          "end": 59.04,
+          "probability": 0.8219326734542847
+        },
+        {
+          "word": " central",
+          "start": 59.04,
+          "end": 59.22,
+          "probability": 0.9694997072219849
+        },
+        {
+          "word": " para",
+          "start": 59.22,
+          "end": 59.519999999999996,
+          "probability": 0.9918835163116455
+        },
+        {
+          "word": " a",
+          "start": 59.519999999999996,
+          "end": 59.58,
+          "probability": 0.6231368780136108
+        },
+        {
+          "word": " atmosfera.",
+          "start": 59.58,
+          "end": 59.980000000000004,
+          "probability": 0.9685171544551849
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "seek": 0,
+      "start": 60.0,
+      "end": 61.0,
+      "text": " era de terror.",
+      "tokens": [
+        50364,
+        4249,
+        368,
+        8127,
+        13,
+        50480
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " era",
+          "start": 60.0,
+          "end": 60.18,
+          "probability": 0.02428954839706421
+        },
+        {
+          "word": " de",
+          "start": 60.18,
+          "end": 60.46,
+          "probability": 0.9730253219604492
+        },
+        {
+          "word": " terror.",
+          "start": 60.46,
+          "end": 61.0,
+          "probability": 0.9867766499519348
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "seek": 0,
+      "start": 61.94,
+      "end": 63.52,
+      "text": " Número 1",
+      "tokens": [
+        50480,
+        426,
+        2481,
+        936,
+        78,
+        502,
+        50570
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Número",
+          "start": 61.94,
+          "end": 62.46,
+          "probability": 0.8364190608263016
+        },
+        {
+          "word": " 1",
+          "start": 62.46,
+          "end": 63.52,
+          "probability": 0.8398563861846924
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "seek": 0,
+      "start": 64.12,
+      "end": 66.6,
+      "text": " Cenas assustadoras improvisadas",
+      "tokens": [
+        50570,
+        383,
+        11581,
+        1256,
+        381,
+        5409,
+        296,
+        39784,
+        6872,
+        50746
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Cenas",
+          "start": 63.85,
+          "end": 64.22,
+          "probability": 0.546436570584774
+        },
+        {
+          "word": " assustadoras",
+          "start": 64.22,
+          "end": 65.18,
+          "probability": 0.9809328466653824
+        },
+        {
+          "word": " improvisadas",
+          "start": 65.18,
+          "end": 66.6,
+          "probability": 0.7085636705160141
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "seek": 0,
+      "start": 67.64,
+      "end": 70.96000000000001,
+      "text": " Muitas das reações de susto dos atores foram reais.",
+      "tokens": [
+        50746,
+        376,
+        1983,
+        296,
+        1482,
+        319,
+        17971,
+        368,
+        5402,
+        78,
+        4491,
+        412,
+        2706,
+        23102,
+        34823,
+        13,
+        50990
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Muitas",
+          "start": 67.37,
+          "end": 67.74,
+          "probability": 0.858111580212911
+        },
+        {
+          "word": " das",
+          "start": 67.74,
+          "end": 67.96,
+          "probability": 0.9938037395477295
+        },
+        {
+          "word": " reações",
+          "start": 67.96,
+          "end": 68.52,
+          "probability": 0.9973832964897156
+        },
+        {
+          "word": " de",
+          "start": 68.52,
+          "end": 68.9,
+          "probability": 0.9976778626441956
+        },
+        {
+          "word": " susto",
+          "start": 68.9,
+          "end": 69.24,
+          "probability": 0.9894332587718964
+        },
+        {
+          "word": " dos",
+          "start": 69.24,
+          "end": 69.5,
+          "probability": 0.9929491281509399
+        },
+        {
+          "word": " atores",
+          "start": 69.5,
+          "end": 70.02,
+          "probability": 0.9981876909732819
+        },
+        {
+          "word": " foram",
+          "start": 70.02,
+          "end": 70.32,
+          "probability": 0.996070384979248
+        },
+        {
+          "word": " reais.",
+          "start": 70.32,
+          "end": 70.96000000000001,
+          "probability": 0.9794403910636902
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "seek": 0,
+      "start": 72.22,
+      "end": 74.18,
+      "text": " Espero que tenham gostado.",
+      "tokens": [
+        50990,
+        41831,
+        631,
+        2064,
+        4822,
+        13188,
+        1573,
+        13,
+        51118
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Espero",
+          "start": 72.22,
+          "end": 72.53999999999999,
+          "probability": 0.9904190897941589
+        },
+        {
+          "word": " que",
+          "start": 72.53999999999999,
+          "end": 72.82,
+          "probability": 0.9988184571266174
+        },
+        {
+          "word": " tenham",
+          "start": 72.82,
+          "end": 73.03999999999999,
+          "probability": 0.9972062408924103
+        },
+        {
+          "word": " gostado.",
+          "start": 73.03999999999999,
+          "end": 74.18,
+          "probability": 0.9992956519126892
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "seek": 0,
+      "start": 74.9,
+      "end": 79.7,
+      "text": " Essas foram 5 curiosidades sobre Invocação do Mal, 2013.",
+      "tokens": [
+        51118,
+        14357,
+        296,
+        23102,
+        1025,
+        13625,
+        10284,
+        5473,
+        682,
+        3080,
+        496,
+        2917,
+        360,
+        5746,
+        11,
+        9012,
+        13,
+        51406
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Essas",
+          "start": 74.9,
+          "end": 75.22,
+          "probability": 0.9712682068347931
+        },
+        {
+          "word": " foram",
+          "start": 75.22,
+          "end": 75.5,
+          "probability": 0.9958321452140808
+        },
+        {
+          "word": " 5",
+          "start": 75.5,
+          "end": 75.98,
+          "probability": 0.6121123433113098
+        },
+        {
+          "word": " curiosidades",
+          "start": 75.98,
+          "end": 76.86,
+          "probability": 0.9450930058956146
+        },
+        {
+          "word": " sobre",
+          "start": 76.86,
+          "end": 77.16,
+          "probability": 0.9983626008033752
+        },
+        {
+          "word": " Invocação",
+          "start": 77.16,
+          "end": 77.8,
+          "probability": 0.9280684590339661
+        },
+        {
+          "word": " do",
+          "start": 77.8,
+          "end": 78.0,
+          "probability": 0.9847390651702881
+        },
+        {
+          "word": " Mal,",
+          "start": 78.0,
+          "end": 78.18,
+          "probability": 0.6435890197753906
+        },
+        {
+          "word": " 2013.",
+          "start": 78.76,
+          "end": 79.7,
+          "probability": 0.9813411235809326
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "seek": 0,
+      "start": 80.88,
+      "end": 86.98,
+      "text": " Se curtiu, deixe o like, se inscreve no canal e comenta qual outro filme de terror você",
+      "tokens": [
+        51406,
+        1100,
+        28087,
+        5951,
+        11,
+        9963,
+        68,
+        277,
+        411,
+        11,
+        369,
+        27824,
+        303,
+        572,
+        9911,
+        308,
+        395,
+        8938,
+        4101,
+        13170,
+        26488,
+        368,
+        8127,
+        2723,
+        51706
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " Se",
+          "start": 80.88,
+          "end": 80.98,
+          "probability": 0.9811514019966125
+        },
+        {
+          "word": " curtiu,",
+          "start": 80.98,
+          "end": 81.6,
+          "probability": 0.9967337250709534
+        },
+        {
+          "word": " deixe",
+          "start": 81.96000000000001,
+          "end": 82.2,
+          "probability": 0.9267272055149078
+        },
+        {
+          "word": " o",
+          "start": 82.2,
+          "end": 82.4,
+          "probability": 0.9859195947647095
+        },
+        {
+          "word": " like,",
+          "start": 82.4,
+          "end": 82.72,
+          "probability": 0.9209029078483582
+        },
+        {
+          "word": " se",
+          "start": 83.14,
+          "end": 83.38,
+          "probability": 0.9906802773475647
+        },
+        {
+          "word": " inscreve",
+          "start": 83.38,
+          "end": 83.78,
+          "probability": 0.9652175605297089
+        },
+        {
+          "word": " no",
+          "start": 83.78,
+          "end": 83.94,
+          "probability": 0.9976167678833008
+        },
+        {
+          "word": " canal",
+          "start": 83.94,
+          "end": 84.28,
+          "probability": 0.9976736903190613
+        },
+        {
+          "word": " e",
+          "start": 84.28,
+          "end": 84.6,
+          "probability": 0.9973668456077576
+        },
+        {
+          "word": " comenta",
+          "start": 84.6,
+          "end": 85.02,
+          "probability": 0.9839242100715637
+        },
+        {
+          "word": " qual",
+          "start": 85.02,
+          "end": 85.28,
+          "probability": 0.9939931035041809
+        },
+        {
+          "word": " outro",
+          "start": 85.28,
+          "end": 85.72,
+          "probability": 0.9770517945289612
+        },
+        {
+          "word": " filme",
+          "start": 85.72,
+          "end": 86.02,
+          "probability": 0.9989033937454224
+        },
+        {
+          "word": " de",
+          "start": 86.02,
+          "end": 86.3,
+          "probability": 0.9976975321769714
+        },
+        {
+          "word": " terror",
+          "start": 86.3,
+          "end": 86.6,
+          "probability": 0.996572732925415
+        },
+        {
+          "word": " você",
+          "start": 86.6,
+          "end": 86.98,
+          "probability": 0.9947814345359802
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "seek": 0,
+      "start": 86.98,
+      "end": 87.96000000000001,
+      "text": " quer ver aqui.",
+      "tokens": [
+        51706,
+        7083,
+        1306,
+        3871,
+        13,
+        51822
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.20521851003170014,
+      "compression_ratio": 1.408450704225352,
+      "no_speech_prob": 0.04875820875167847,
+      "words": [
+        {
+          "word": " quer",
+          "start": 86.98,
+          "end": 87.24,
+          "probability": 0.9985479712486267
+        },
+        {
+          "word": " ver",
+          "start": 87.24,
+          "end": 87.48,
+          "probability": 0.9966302514076233
+        },
+        {
+          "word": " aqui.",
+          "start": 87.48,
+          "end": 87.96000000000001,
+          "probability": 0.9914904236793518
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "seek": 2796,
+      "start": 88.66,
+      "end": 89.94,
+      "text": " Até a próxima!",
+      "tokens": [
+        50406,
+        31793,
+        257,
+        24096,
+        0,
+        50466
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.8234699964523315,
+      "compression_ratio": 0.6666666666666666,
+      "no_speech_prob": 0.043059200048446655,
+      "words": [
+        {
+          "word": " Até",
+          "start": 88.66,
+          "end": 89.3,
+          "probability": 0.9509882926940918
+        },
+        {
+          "word": " a",
+          "start": 89.3,
+          "end": 89.58,
+          "probability": 0.9648029804229736
+        },
+        {
+          "word": " próxima!",
+          "start": 89.58,
+          "end": 89.94,
+          "probability": 0.9966034889221191
+        }
+      ]
+    }
+  ],
+  "language": "pt",
+  "language_probability": 0.999051034450531
+}

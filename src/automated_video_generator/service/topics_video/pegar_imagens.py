@@ -3,6 +3,8 @@ import json
 import os
 import shutil
 import time
+from pathlib import Path
+
 import unicodedata
 import uuid  # Para gerar nomes únicos para o backup
 

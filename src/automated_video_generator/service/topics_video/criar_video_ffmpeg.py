@@ -1559,10 +1559,32 @@ def preencher_lacunas_temporais(
     return nova_lista_de_clipes
 
 
+def gif_to_mp4(input_path, output_path=None):
+    if output_path is None:
+        output_path = os.path.splitext(input_path)[0] + ".mp4"
+
+    cmd = [
+        "ffmpeg",
+        "-y",
+        "-i", input_path,
+        "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
+        "-c:v", "libx264",
+        "-profile:v", "high",
+        "-level", "4.0",
+        "-pix_fmt", "yuv420p",
+        "-movflags", "faststart",
+        output_path
+    ]
+
+    subprocess.run(cmd, check=True)
+    return output_path
+
+
 
 # Exemplo de uso
 def main():
     print("Carregando imagens e metadados...")
+    gif_to_mp4(BASE_DIR / "assets" / "topics_video" / "videos" / "possiveis_intro.gif")
     image_data = []
     for filename in sorted(os.listdir(PROCESSED_DIR)):
         base, ext = os.path.splitext(filename)

@@ -27,7 +27,7 @@ FILE_CONFIG = {
     },
     "music": {
         "path": BASE_DIR / "assets" / "topics_video" / "audio",
-        "save_name": "background_music"  # A extensão (.mp3) é adicionada automaticamente
+        "save_name": "musica_fundo"  # A extensão (.mp3) é adicionada automaticamente
     },
     "transition": {
         "path": BASE_DIR / "assets" / "topics_video" / "videos",

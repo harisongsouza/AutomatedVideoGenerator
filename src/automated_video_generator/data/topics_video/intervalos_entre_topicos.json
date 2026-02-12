@@ -1,0 +1,37 @@
+[
+  {
+    "nome": "intervalo_introducao",
+    "start": 0.0,
+    "end": 9.5
+  },
+  {
+    "nome": "número_5_inspirado_em_eventos_reais",
+    "start": 14.379999999999999,
+    "end": 23.779999999999998
+  },
+  {
+    "nome": "número_4_ed_e_lorraine_warren_participaram_do_filme",
+    "start": 28.3,
+    "end": 37.78
+  },
+  {
+    "nome": "número_3_a_boneca_annabelle_quase_não_aparece",
+    "start": 43.08,
+    "end": 50.78
+  },
+  {
+    "nome": "número_2_a_trilha_sonora_intensifica_o_medo",
+    "start": 55.760000000000005,
+    "end": 61.94
+  },
+  {
+    "nome": "número_1_cenas_assustadoras_improvisadas",
+    "start": 67.37,
+    "end": 72.22
+  },
+  {
+    "nome": "intervalo_conclusao",
+    "start": 74.9,
+    "end": 89.94
+  }
+]
