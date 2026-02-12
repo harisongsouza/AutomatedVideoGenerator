@@ -67,7 +67,7 @@ def main():
     """
     app.setStyleSheet(QSS)
     janela = MainWindow()
-    janela.show()
+    janela.showMaximized()
     sys.exit(app.exec())
 
 
