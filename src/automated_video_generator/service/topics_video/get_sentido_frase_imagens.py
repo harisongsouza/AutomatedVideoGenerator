@@ -4,7 +4,8 @@ import unicodedata
 import uuid
 import spacy
 from deep_translator import GoogleTranslator
-from pathlib import Path
+
+from automated_video_generator.config import BASE_DIR
 
 # --- CONFIGURAÇÃO INICIAL (executa apenas uma vez) ---
 print("Carregando modelo de linguagem (spaCy)...")
@@ -93,7 +94,6 @@ def main(tema):
     """
     tema_do_video = tema # Defina o tema principal aqui
 
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     arquivo_entrada = BASE_DIR / "data" / "topics_video" / "video_com_frases.json"
     arquivo_saida = BASE_DIR / "data" / "topics_video" / "video_final_com_buscas.json"
 

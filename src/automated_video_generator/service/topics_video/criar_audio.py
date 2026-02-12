@@ -1,10 +1,8 @@
 import asyncio
 import edge_tts
-from pathlib import Path
+from automated_video_generator.config import BASE_DIR
 
 async def ler_roteiro_e_converter():
-    # Define a raiz como a pasta onde o script está
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     # Monta o caminho completo dentro da pasta do projeto
     arquivo_roteiro = BASE_DIR / "data" / "topics_video" / "roteiro.txt"
 

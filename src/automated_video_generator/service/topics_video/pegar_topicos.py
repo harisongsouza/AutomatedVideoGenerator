@@ -3,8 +3,8 @@ import unicodedata
 import re
 from rapidfuzz.fuzz import ratio
 from thefuzz import fuzz
-from pathlib import Path
 
+from automated_video_generator.config import BASE_DIR
 
 def extrair_topicos_do_arquivo(caminho_do_arquivo):
     topicos_encontrados = []
@@ -31,7 +31,6 @@ def extrair_topicos_do_arquivo(caminho_do_arquivo):
 
     return topicos_encontrados
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 json_path = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
 saida_path = BASE_DIR / "data" / "topics_video" / "topicos.json"
 

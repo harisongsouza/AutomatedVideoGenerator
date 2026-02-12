@@ -5,7 +5,8 @@ import shutil
 import time
 import unicodedata
 import uuid  # Para gerar nomes únicos para o backup
-from pathlib import Path
+
+from automated_video_generator.config import BASE_DIR
 
 def remover_acentos(texto):
     remover = "´^~\"'"  # Adiciona aspas duplas (") e simples (')
@@ -46,8 +47,6 @@ def executar_script_powershell(caminho_script, urls_file_folder_to_save=None, ar
                 path_line = line
                 break
 
-        BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
         if caminho_script == BASE_DIR / "utils" / "topics_video" / "download_images_from_links_file.ps1":
 
             if path_line:
@@ -77,8 +76,6 @@ def deletar_arquivo_downloads(nome_arquivo):
     try:
         # Obtém o caminho para a pasta de Downloads do usuário
         caminho_downloads = os.path.join(os.path.expanduser("~"), "Downloads")
-
-        BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
         caminho_downloads = BASE_DIR / "data" / "topics_video"
 
@@ -117,8 +114,6 @@ def limpar_apenas_imagens_recursivo(pasta):
 
 
 def verificar_arquivo_e_string(nome_arquivo, string_procurada):
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
     pasta_downloads = BASE_DIR / "data" / "topics_video"
     caminho_arquivo = os.path.join(pasta_downloads, nome_arquivo)
 
@@ -142,7 +137,6 @@ def verificar_arquivo_e_string(nome_arquivo, string_procurada):
 
 
 def main():
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     # Caminhos dos scripts
     script1 = BASE_DIR / "utils" / "topics_video" / "duckduckgo.ps1"
     script2 = BASE_DIR / "utils" / "topics_video" / "download_images_from_links_file.ps1"

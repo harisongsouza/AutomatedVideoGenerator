@@ -1,5 +1,5 @@
 import json
-from pathlib import Path
+from automated_video_generator.config import BASE_DIR
 
 def gerar_intervalos_entre_topicos(transcricao, topicos):
     """
@@ -56,7 +56,6 @@ def gerar_intervalos_entre_topicos(transcricao, topicos):
 
 
 def main():
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     path_transcricao = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
     path_topicos = BASE_DIR / "data" / "topics_video" / "topicos.json"
     path_saida = BASE_DIR / "data" / "topics_video" / "intervalos_entre_topicos.json"

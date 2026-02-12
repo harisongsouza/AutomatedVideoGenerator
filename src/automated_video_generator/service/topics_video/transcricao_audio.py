@@ -1,9 +1,9 @@
 from faster_whisper import WhisperModel
 import json
 from pathlib import Path
+from automated_video_generator.config import BASE_DIR
 
 def main():
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     arquivo_transcricao = BASE_DIR / "data" / "topics_video" / "transcription.json"
     arquivo_transcricao_words = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
 

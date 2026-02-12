@@ -3,7 +3,8 @@ import cv2 # OpenCV para detecção de rosto
 import numpy as np
 from PIL import Image, ImageFilter, UnidentifiedImageError
 import json # Para salvar metadados
-from pathlib import Path
+
+from automated_video_generator.config import BASE_DIR
 
 # --- Configurações ---
 TARGET_WIDTH = 1920
@@ -28,7 +29,6 @@ BLUR_RADIUS = 50
 BACKGROUND_COLOR = (0, 0, 0) # Preto para letterbox/pillarbox
 
 # Diretórios (mantenha ou ajuste)
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 INPUT_IMAGE_DIR = BASE_DIR / "assets" / "topics_video" / "imagens"
 OUTPUT_IMAGE_DIR = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
 

@@ -5,10 +5,10 @@ import tempfile
 from pydub import AudioSegment
 from faster_whisper import WhisperModel
 import time
-from pathlib import Path
+
+from automated_video_generator.config import BASE_DIR
 
 # --- Configurações ---
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 AUDIO_FILE_PATH = BASE_DIR / "assets" / "topics_video" / "audio" / "narracao.wav"
 
 MODEL_SIZE = "medium"

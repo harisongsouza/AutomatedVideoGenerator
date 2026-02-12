@@ -1,6 +1,6 @@
 import json
 import bisect
-from pathlib import Path
+from automated_video_generator.config import BASE_DIR
 
 def carregar_json(caminho_arquivo):
     """Carrega dados de um arquivo JSON."""
@@ -52,7 +52,6 @@ def montar_frases_para_imagens(caminho_json_estrutura, caminho_json_transcricao,
 
 
 def main():
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     caminho_estrutura = BASE_DIR / "data" / "topics_video" / "imagens_em_intervalos_topicos.json"
     caminho_transcricao = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
     caminho_saida = BASE_DIR / "data" / "topics_video" / "video_com_frases.json"

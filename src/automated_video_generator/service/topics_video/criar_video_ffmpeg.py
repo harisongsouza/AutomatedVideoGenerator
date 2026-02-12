@@ -18,11 +18,10 @@ from pydub import AudioSegment
 from pydub.silence import detect_nonsilent
 
 from pathlib import Path
-
+from automated_video_generator.config import BASE_DIR
 
 #CONFIGURACAO
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PROCESSED_DIR = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
 TEMP_WORK_DIR = BASE_DIR / "assets" / "topics_video" / "videos" / "intervalo_entre_topicos" # Pasta para frames e vídeos intermediários
 

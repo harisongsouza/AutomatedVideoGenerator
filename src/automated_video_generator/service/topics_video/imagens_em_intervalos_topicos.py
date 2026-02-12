@@ -1,5 +1,5 @@
 import json
-from pathlib import Path
+from automated_video_generator.config import BASE_DIR
 
 def adicionar_imagens_em_intervalos(entrada_json, saida_json, duracao_imagem=6, tolerancia_minima=4):
     """
@@ -66,7 +66,6 @@ def adicionar_imagens_em_intervalos(entrada_json, saida_json, duracao_imagem=6, 
 
 def main():
     # Caminhos dos arquivos
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
     entrada_path = BASE_DIR / "data" / "topics_video" / "intervalos_entre_topicos.json"
     saida_path = BASE_DIR / "data" / "topics_video" / "imagens_em_intervalos_topicos.json"
 
