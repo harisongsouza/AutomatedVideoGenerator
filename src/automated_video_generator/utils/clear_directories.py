@@ -2,8 +2,14 @@ from pathlib import Path
 
 
 def clear_directories(pasta):
+    print(f"Limpando pastas do projeto ...")
+
     # Extensões que queremos apagar
-    extensoes_para_deletar = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.json', '.txt', '.wav'}
+    extensoes_para_deletar = {
+        '.json', '.txt',
+        '.wav', '.mp3', '.mp4', '.webp',
+        '.jpg', '.jpeg', '.png', '.gif'
+    }
 
     caminho_base = Path(pasta)
 
@@ -16,6 +22,6 @@ def clear_directories(pasta):
         if item.is_file() and item.suffix.lower() in extensoes_para_deletar:
             if item.name != "__init__.py":
                 item.unlink()
-                print(f"Arquivo deletado: {item.name}")
+                #print(f"Arquivo deletado: {item.name}")
 
     print(f"✅ Limpeza concluída em {pasta}. Estrutura de pastas e arquivos .py preservada.")

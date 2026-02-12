@@ -9,10 +9,20 @@ from PySide6.QtWidgets import (
 from automated_video_generator.gui.file_loader_screen import FileLoaderScreen
 from automated_video_generator.gui.home_screen import HomeScreen
 from automated_video_generator.gui.template_selection_screen import TemplateSelectionScreen
+from automated_video_generator.config import BASE_DIR
+from automated_video_generator.utils.clear_directories import clear_directories
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        pasta_de_arquivos = BASE_DIR / "data" / "topics_video"
+        clear_directories(pasta_de_arquivos)
+
+        pasta_de_midias = BASE_DIR / "assets" / "topics_video"
+        clear_directories(pasta_de_midias)
+
         self.setWindowTitle("AutoVid Creator")
         self.resize(900, 650)
 

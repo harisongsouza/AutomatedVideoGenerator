@@ -14,8 +14,6 @@ from automated_video_generator.service.validate_files import validar_arquivos_fo
 from automated_video_generator.gui.progress_window import ProgressWindow
 
 from automated_video_generator.config import BASE_DIR
-from automated_video_generator.utils.clear_directories import clear_directories
-
 # =================================================================
 # CONFIGURAÇÃO DE DESTINOS - ALTERE AQUI PARA ONDE OS ARQUIVOS VÃO
 # =================================================================
@@ -433,13 +431,6 @@ class FileLoaderScreen(QWidget):
 if __name__ == "__main__":
     from PySide6.QtWidgets import QApplication
     import sys
-
-    pasta_para_limpar = BASE_DIR / "data" / "topics_video"
-    clear_directories(pasta_para_limpar)
-
-    pasta_para_limpar = BASE_DIR / "assets" / "topics_video"
-    clear_directories(pasta_para_limpar)
-
     app = QApplication(sys.argv)
     w = FileLoaderScreen();
     w.set_template("topicos");
