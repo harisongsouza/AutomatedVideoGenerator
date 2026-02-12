@@ -40,14 +40,31 @@ if not os.path.exists(HAAR_CASCADE_PATH):
     exit()
 face_cascade = cv2.CascadeClassifier(HAAR_CASCADE_PATH)
 
-def encontrar_imagem_por_path(json_data, caminho_buscado):
-    # Função original mantida sem alterações.
-    for camada in json_data:
-        for imagem in camada.get("imagens", []):
-            path_info = imagem.get("path", {})
-            if path_info == caminho_buscado:
-                return imagem  # Retorna o objeto imagem correspondente
-    return None  # Caso não encontre
+def encontrar_objeto_por_path(img_path, arquivo_img_interv):
+    # 1. Normaliza o caminho buscado (transforma tudo para o padrão do sistema atual)
+    # Isso faz com que "C:/Pasta/Foto.jpg" seja igual a "C:\\Pasta\\Foto.jpg"
+    path_buscado_norm = os.path.normpath(img_path.strip())
+
+    # 2. Varre cada objeto principal (cada cena/tópico)
+    for objeto_pai in arquivo_img_interv:
+        # Pega a lista de imagens, se não existir retorna lista vazia para não dar erro
+        lista_imagens = objeto_pai.get("imagens", [])
+
+        # 3. Varre as imagens dentro desse objeto
+        for imagem in lista_imagens:
+            path_imagem_json = imagem.get("path")
+
+            if path_imagem_json:
+                # Normaliza o caminho que está no JSON também
+                path_json_norm = os.path.normpath(path_imagem_json.strip())
+
+                # 4. Compara os caminhos normalizados
+                if path_buscado_norm == path_json_norm:
+                    # ACHOU! Retorna o objeto pai inteiro conforme você pediu
+                    return objeto_pai
+
+    # Se varreu tudo e não achou
+    return None
 
 # --- Funções Auxiliares (mantidas sem alterações) ---
 def find_main_face_center(cv_image):
@@ -67,13 +84,13 @@ def create_blurred_background(img_pil, target_w, target_h, blur_radius):
     return bg
 
 # --- Função Principal de Processamento com a alteração MÍNIMA ---
-def process_and_validate_image_revised(image_path, output_dir):
+def process_and_validate_image_revised(img_path, output_dir):
     try:
-        img_pil_original = Image.open(image_path)
+        img_pil_original = Image.open(img_path)
         img_pil_original = img_pil_original.convert("RGB")
 
         original_width, original_height = img_pil_original.size
-        print(f"\nProcessando: {os.path.basename(image_path)} - Original: {original_width}x{original_height}")
+        print(f"\nProcessando: {os.path.basename(img_path)} - Original: {original_width}x{original_height}")
 
         # 1. Detectar ponto de interesse na imagem ORIGINAL
         img_cv = np.array(img_pil_original)
@@ -156,7 +173,7 @@ def process_and_validate_image_revised(image_path, output_dir):
 
         # --- Salvar Imagem Processada e Metadados (bloco original mantido) ---
         if processed_img_pil:
-            base_name = os.path.basename(image_path)
+            base_name = os.path.basename(img_path)
             name, ext = os.path.splitext(base_name)
             output_filename_jpg = f"{name}_processed.jpg"
             output_path_jpg = f"{output_dir}/{output_filename_jpg}"
@@ -175,8 +192,8 @@ def process_and_validate_image_revised(image_path, output_dir):
             json_path = BASE_DIR / "data" / "topics_video" / "add_img_path_img_interv.json"
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
-                    tra = json.load(f)
-                obj_da_imagem = encontrar_imagem_por_path(tra, image_path)
+                    arquivo_img_interv = json.load(f)
+                obj_da_imagem = encontrar_objeto_por_path(img_path, arquivo_img_interv)
                 if obj_da_imagem:
                     metadata['start'] = obj_da_imagem['start']
                     metadata['end'] = obj_da_imagem['end']
@@ -205,25 +222,22 @@ def process_and_validate_image_revised(image_path, output_dir):
             return None
 
     except FileNotFoundError:
-        print(f"ERRO: Arquivo não encontrado: {image_path}")
+        print(f"ERRO: Arquivo não encontrado: {img_path}")
         return None
     except UnidentifiedImageError:
-        print(f"ERRO: Não foi possível identificar/abrir imagem: {image_path}")
+        print(f"ERRO: Não foi possível identificar/abrir imagem: {img_path}")
         return None
     except cv2.error as e_cv:
-        print(f"ERRO OpenCV ao processar {image_path}: {e_cv}")
+        print(f"ERRO OpenCV ao processar {img_path}: {e_cv}")
         if 'img_pil_original' in locals() and hasattr(img_pil_original, 'close'): img_pil_original.close()
         return None
     except Exception as e:
-        print(f"ERRO inesperado ao processar {image_path}: {e}")
+        print(f"ERRO inesperado ao processar {img_path}: {e}")
         if 'img_pil_original' in locals() and hasattr(img_pil_original, 'close'): img_pil_original.close()
         return None
 
 # --- Execução Principal (mantida sem alterações) ---
 def main():
-    pasta_destino = BASE_DIR / "assets" / "topics_video" / "imagens" / "imagens_processadas"
-    os.makedirs(pasta_destino, exist_ok=True)
-
     valid_image_paths = []
     image_files = []
 
@@ -247,6 +261,7 @@ def main():
 
         print("\n--- Resumo ---")
         print(f"Total de imagens processadas com sucesso: {len(valid_image_paths)}")
+        os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
         print("Imagens válidas salvas em:", OUTPUT_IMAGE_DIR)
 
 if __name__ == "__main__":

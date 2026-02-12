@@ -5,6 +5,7 @@ from pathlib import Path
 def main():
     BASE_DIR = Path(__file__).resolve().parent.parent.parent
     arquivo_transcricao = BASE_DIR / "data" / "topics_video" / "transcription.json"
+    arquivo_transcricao_words = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
 
     with open(arquivo_transcricao, 'r', encoding="utf-8") as f:
         intervalos = json.load(f)
@@ -33,7 +34,7 @@ def main():
             })
 
     # Salva em um arquivo JSON
-    with open(arquivo_transcricao, "w", encoding="utf-8") as f:
+    with open(arquivo_transcricao_words, "w", encoding="utf-8") as f:
         json.dump(words_data, f, ensure_ascii=False, indent=2)
 
     print("✅ Transcrição salva em 'transcription_words.json'")

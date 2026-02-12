@@ -1,14 +1,17 @@
 
-$entrada = $args[0]
+
+# Caminho para o arquivo de URLs
+$arquivoDeUrls = $args[1]
+
+# Pasta onde as imagens serão salvas
+$pastaDestino = $args[2]
+
+# O arquivo de 'frase_de_busca'
+$entrada = $args[3]
 
 $stringMinuscula = $entrada.ToLower()
 $stringModificada = $stringMinuscula.Replace(" ", "_")
 
-# Caminho para o arquivo de URLs
-$arquivoDeUrls = "C:/Users/souza/Downloads/urls.txt"
-
-# Pasta onde as imagens serão salvas
-$pastaDestino = "C:/Users/souza/Videos/VideoCreator/assets/imagens/"
 if (!(Test-Path -Path $pastaDestino)) {
     New-Item -ItemType Directory -Path $pastaDestino | Out-Null
 }
@@ -29,7 +32,7 @@ Get-Content $arquivoDeUrls | ForEach-Object {
             if ([string]::IsNullOrEmpty($extensao)) {
                 $extensao = ".jpg" # padrão se não tiver extensão
             }
- 
+
             # Nome do arquivo (ex: imagem_1.jpg)
             $nomeArquivo = "$stringModificada$extensao"
             $caminhoCompleto = Join-Path $pastaDestino $nomeArquivo

@@ -1,4 +1,3 @@
-
 from PySide6.QtCore import Qt, QThread
 from PySide6.QtWidgets import (
     QVBoxLayout,
@@ -14,15 +13,19 @@ from automated_video_generator.workers.video_worker import Worker
 class ProgressWindow(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self.setWindowTitle("Processando Vídeo")
         self.setModal(True)
         self.resize(450, 150)
         self.setWindowFlag(Qt.WindowCloseButtonHint, False)
+
         self.progressBar = QProgressBar()
         self.progressBar.setTextVisible(True)
         self.progressBar.setRange(0, 100)
+
         self.statusLabel = QLabel("Iniciando processamento...")
         self.statusLabel.setAlignment(Qt.AlignCenter)
+
         layout = QVBoxLayout(self)
         layout.addWidget(self.statusLabel)
         layout.addWidget(self.progressBar)
@@ -30,34 +33,54 @@ class ProgressWindow(QDialog):
     def start_layer_video_processing(self, filepath, tema, template_escolhido):
         self.thread = QThread()
         self.worker = Worker(filepath, tema, template_escolhido)
+
         self.worker.moveToThread(self.thread)
+
         self.thread.started.connect(self.worker.run)
         self.worker.finished.connect(self.on_finished)
         self.worker.error.connect(self.on_error)
         self.worker.progress.connect(self.update_progress)
+
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
+
         self.thread.start()
         self.exec()
 
     def start_topics_video_processing(self, filepath, tema, template_escolhido):
         self.thread = QThread()
         self.worker = Worker(filepath, tema, template_escolhido)
+
         self.worker.moveToThread(self.thread)
+
         self.thread.started.connect(self.worker.run)
         self.worker.finished.connect(self.on_finished)
         self.worker.error.connect(self.on_error)
         self.worker.progress.connect(self.update_progress)
+
         self.worker.finished.connect(self.thread.quit)
         self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
+
         self.thread.start()
         self.exec()
 
-    def update_progress(self, value, message): self.progressBar.setValue(value);  self.statusLabel.setText(message)
+    def update_progress(self, value, message):
+        self.progressBar.setValue(value)
+        self.statusLabel.setText(message)
 
-    def on_finished(self): self.statusLabel.setText("Processo concluído com sucesso!");  self.progressBar.setValue(
-        100);  QMessageBox.information(self, "Sucesso", "O vídeo foi gerado com sucesso!");  self.accept()
+    def on_finished(self):
+        self.statusLabel.setText("Processo concluído com sucesso!")
+        self.progressBar.setValue(100)
 
-    def on_error(self, title, message): QMessageBox.critical(self, title, message);  self.reject()
+        QMessageBox.information(
+            self,
+            "Sucesso",
+            "O vídeo foi gerado com sucesso!"
+        )
+        self.accept()
+
+    def on_error(self, title, message):
+        QMessageBox.critical(self, title, message)
+        self.reject()

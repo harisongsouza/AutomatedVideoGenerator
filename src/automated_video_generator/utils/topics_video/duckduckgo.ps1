@@ -12,7 +12,11 @@ function Remover-UUID {
     return $resultado.Trim()
 }
 
-$entrada = $args[0]
+# urls_file_folder_to_save
+$urls_file_folder_to_save = $args[0]
+
+# O arquivo de 'frase_de_busca'
+$entrada = $args[3]
 
 $stringMinuscula = $entrada.ToLower()
 $stringModificada = Remover-UUID $stringMinuscula
@@ -121,12 +125,43 @@ $shell.SendKeys('{F12}')
 Start-Sleep -Seconds 2
 
 # Espera o download do arquivo urls.txt na pasta Downloads
-$downloadsPath = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
-$arquivoDestino = Join-Path $downloadsPath "urls.txt"
+
+# Deleta 'urls.txt' se já existir
+$diretorio = $urls_file_folder_to_save
+$arquivo = Join-Path $diretorio "urls.txt"
+
+if (Test-Path $arquivo) {
+    Remove-Item $arquivo
+    Write-Host "urls.txt removido"
+} else {
+    Write-Host "Não existe urls.txt, segue o jogo"
+}
+
+# Pasta de destino FINAL (onde você quer salvar)
+$destinoFinal = $urls_file_folder_to_save
+$arquivoDestinoFinal = Join-Path $destinoFinal "urls.txt"
+
+# Pasta padrão de downloads
+$downloadsPath = Join-Path $HOME "Downloads"
+$arquivoDownloads = Join-Path $downloadsPath "urls.txt"
+
+# Timeout
 $timeout = 180
 $tempoEsperado = 0
 
-while (-not (Test-Path $arquivoDestino) -and ($tempoEsperado -lt $timeout)) {
+while (-not (Test-Path $arquivoDestinoFinal) -and ($tempoEsperado -lt $timeout)) {
+
+    if (Test-Path $arquivoDownloads) {
+        # Garante que a pasta de destino existe
+        if (-not (Test-Path $destinoFinal)) {
+            New-Item -ItemType Directory -Path $destinoFinal -Force | Out-Null
+        }
+
+        # Move o arquivo
+        Move-Item $arquivoDownloads $arquivoDestinoFinal -Force
+        Write-Host "✅ urls.txt movido para: $arquivoDestinoFinal"
+    }
+
     Start-Sleep -Seconds 1
     $tempoEsperado++
 }

@@ -6,23 +6,6 @@ from thefuzz import fuzz
 from pathlib import Path
 
 
-""" def extrair_topicos_do_arquivo(caminho_do_arquivo):
-    topicos_encontrados = []
-    try:
-        with open(caminho_do_arquivo, 'r', encoding='utf-8') as arquivo:
-            conteudo = arquivo.read()
-            # Expressão regular para encontrar o padrão "Número X. Tema."
-            # \d+ corresponde a um ou mais dígitos
-            # .*? corresponde a qualquer caractere (exceto nova linha) o mínimo possível
-            # \. corresponde ao ponto final literal
-            padrao = r"Número\s\d+\.\s.*?\."
-            topicos_encontrados = re.findall(padrao, conteudo)
-    except FileNotFoundError:
-        print(f"Erro: O arquivo '{caminho_do_arquivo}' não foi encontrado.")
-    except Exception as e:
-        print(f"Ocorreu um erro ao ler o arquivo: {e}")
-    return topicos_encontrados """
-
 def extrair_topicos_do_arquivo(caminho_do_arquivo):
     topicos_encontrados = []
     try:
@@ -49,68 +32,10 @@ def extrair_topicos_do_arquivo(caminho_do_arquivo):
     return topicos_encontrados
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-json_path = BASE_DIR / "data" / "topics_video" / "transcription.json"
+json_path = BASE_DIR / "data" / "topics_video" / "transcription_words.json"
 saida_path = BASE_DIR / "data" / "topics_video" / "topicos.json"
 
 limiar_similaridade = 75
-
-#criar funcao regex para pegar topicos do roteiro de forma automatica.
-""" frases_alvo = [
-    "Número 1. Bob Esponja.",
-    "Número 2. Dragon Ball Z.",
-    "Número 3. Padrinhos Mágicos.",
-    "Número 1. Fadas.",
-    "Número 2. Os Jetsons.",
-    "Número 3. O Homem de Ferro (anos 60).",
-    "Número 1. A Turma do Didi.",
-    "Número 2. Os Herculóides.",
-    "Número 3. Caverna do Dragão.",
-    "Número 1. Beavis and Butt-Head.",
-    "Número 2. Ren & Stimpy.",
-    "Número 3. Freakazoid.",
-    "Número 1. Luluca.",
-    "Número 2. Episódio perdido de Caverna do Dragão.",
-    "Número 3. O desenho maldito de 1984."
-] """
-
-"""
-def normalizar(texto):
-    "Remove acentos, pontuação, caixa alta e espaços extras."
-    texto = ''.join(
-        c for c in unicodedata.normalize('NFD', texto)
-        if unicodedata.category(c) != 'Mn'
-    )
-    texto = re.sub(r'[^\w\s]', '', texto)  # remove pontuação
-    return re.sub(r'\s+', ' ', texto).strip().lower()
- """
-
-""" def encontrar_frases_em_transcricao(transcricao, frases_alvo, limiar=80):
-    "Procura frases-alvo (com 2+ palavras) na transcrição."
-    resultados = []
-    palavras = transcricao
-
-    for frase_alvo in frases_alvo:
-        frase_alvo_normalizada = normalizar(frase_alvo)
-        num_palavras = len(frase_alvo.split())
-
-        for i in range(len(palavras) - num_palavras + 1):
-            bloco = palavras[i:i + num_palavras]
-            frase_bloco = ' '.join(p["word"].strip() for p in bloco)
-            frase_bloco_normalizada = normalizar(frase_bloco)
-
-            similaridade = ratio(frase_bloco_normalizada, frase_alvo_normalizada)
-
-            if similaridade >= limiar:
-                resultados.append({
-                    "word": frase_alvo,
-                    "start": bloco[0]["start"],
-                    "end": bloco[-1]["end"],
-                    "find": frase_bloco
-                })
-
-    return resultados """
-    #forma que funciona antiga, mas encontra e tras mais de uma frase para um topico
-
 
 def normalizar(texto):
     """Converte para minúsculas e remove pontuações básicas."""
@@ -177,7 +102,7 @@ def encontrar_melhor_correspondencia(transcricao, frases_alvo, limiar=80):
 
 
 def main():
-    frases_alvo = BASE_DIR / "data" / "topics_video" / "roteiro.txt"
+    frases_alvo = extrair_topicos_do_arquivo(BASE_DIR / "data" / "topics_video" / "roteiro.txt")
 
     with open(json_path, "r", encoding="utf-8") as f:
         transcricao = json.load(f)
