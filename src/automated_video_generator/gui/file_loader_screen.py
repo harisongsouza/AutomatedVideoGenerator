@@ -14,6 +14,8 @@ from automated_video_generator.service.validate_files import validar_arquivos_fo
 from automated_video_generator.gui.progress_window import ProgressWindow
 
 from automated_video_generator.config import BASE_DIR
+from automated_video_generator.utils.clear_directories import clear_directories
+
 # =================================================================
 # CONFIGURAÇÃO DE DESTINOS - ALTERE AQUI PARA ONDE OS ARQUIVOS VÃO
 # =================================================================
@@ -31,9 +33,8 @@ FILE_CONFIG = {
     },
     "transition": {
         "path": BASE_DIR / "assets" / "topics_video" / "videos",
-        "save_name": "possiveis_intro"  # A extensão (.gif) é adicionada automaticamente
-        #"save_name": "transition_video"
-},
+        "save_name": "transition_video"  # A extensão (.gif) é adicionada automaticamente
+    },
     "intro": {
         "path": BASE_DIR / "assets" / "topics_video" / "videos" / "camadas",
         "save_name": "video_original_intro_encerramento"  # A extensão (.mp4) é adicionada automaticamente
@@ -432,6 +433,12 @@ class FileLoaderScreen(QWidget):
 if __name__ == "__main__":
     from PySide6.QtWidgets import QApplication
     import sys
+
+    pasta_para_limpar = BASE_DIR / "data" / "topics_video"
+    clear_directories(pasta_para_limpar)
+
+    pasta_para_limpar = BASE_DIR / "assets" / "topics_video"
+    clear_directories(pasta_para_limpar)
 
     app = QApplication(sys.argv)
     w = FileLoaderScreen();

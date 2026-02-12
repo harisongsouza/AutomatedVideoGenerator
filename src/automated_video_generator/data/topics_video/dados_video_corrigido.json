@@ -1,0 +1,119 @@
+[
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\camadas\\videos_padronizado\\video_introducao_padronizado.mp4",
+    "inicio": 0.0,
+    "fim": 9.5,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\0.mp4",
+    "inicio": 9.5,
+    "fim": 14.379999999999999,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\intervalo_entre_topicos\\clip_0.mp4",
+    "inicio": 14.379999999999999,
+    "fim": 23.779999999999998,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\1.mp4",
+    "inicio": 23.779999999999998,
+    "fim": 28.3,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\intervalo_entre_topicos\\clip_1.mp4",
+    "inicio": 28.3,
+    "fim": 37.78,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\2.mp4",
+    "inicio": 37.78,
+    "fim": 43.08,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\intervalo_entre_topicos\\clip_2.mp4",
+    "inicio": 43.08,
+    "fim": 50.78,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\3.mp4",
+    "inicio": 50.78,
+    "fim": 55.760000000000005,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\intervalo_entre_topicos\\clip_3.mp4",
+    "inicio": 55.760000000000005,
+    "fim": 61.94,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\4.mp4",
+    "inicio": 61.94,
+    "fim": 67.37,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\intervalo_entre_topicos\\clip_4.mp4",
+    "inicio": 67.37,
+    "fim": 72.22,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\topicos\\5.mp4",
+    "inicio": 72.22,
+    "fim": 74.9,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  },
+  {
+    "arquivo": "C:\\Users\\souza\\Documents\\AutomatedVideoGenerator\\src\\automated_video_generator\\assets\\topics_video\\videos\\camadas\\videos_padronizado\\video_encerramento_padronizado.mp4",
+    "inicio": 74.9,
+    "fim": 89.94,
+    "x": 0,
+    "y": 0,
+    "largura": 1920,
+    "altura": 1080
+  }
+]

@@ -507,22 +507,6 @@ import os
 import json # Para ler a saída do ffprobe
 import tempfile # Para criar arquivos temporários para o clipe cortado
 
-#VIDEO INTRO, PATH DE SAIDA, TEMPO FIM - INICIO DO AUDIO FINAL
-""" def repetir_ate_duracao(input_path, output_path, duracao_desejada):
-    comando = [
-        "ffmpeg", "-y",
-        "-stream_loop", "-1",
-        "-i", input_path,
-        "-t", str(duracao_desejada),
-        "-c", "copy",
-        output_path
-    ]
-    try:
-        subprocess.run(comando, check=True)
-        return output_path
-    except subprocess.CalledProcessError:
-        return None """
-
 def repetir_ate_duracao(input_path, output_path, duracao_desejada, fps_padrao=30):
     frames = round(duracao_desejada * fps_padrao)
     comando = [
@@ -580,57 +564,6 @@ def get_video_duration(video_path):
     except Exception as e:
         print(f"Erro inesperado ao obter duração de {video_path}: {e}")
         return None
-
-
-""" def recortar_clip(input_path, output_path_corte, duracao_alvo_segundos, inicio_segundos=0.0, preciso=True):
-    if not os.path.exists(input_path):
-        print(f"Erro [recortar_clip]: Arquivo de entrada não encontrado em {input_path}")
-        return None
-    if duracao_alvo_segundos <= 0:
-        print(f"Erro [recortar_clip]: Duração alvo deve ser positiva. Recebido: {duracao_alvo_segundos}")
-        return None
-
-    duracao_original = get_video_duration(input_path)
-    if duracao_original is not None and (inicio_segundos + duracao_alvo_segundos > duracao_original):
-        print(f"Aviso [recortar_clip]: Intervalo solicitado ({inicio_segundos:.2f}s até {(inicio_segundos + duracao_alvo_segundos):.2f}s) excede a duração original ({duracao_original:.2f}s).")
-
-    inicio_str = f"{inicio_segundos:.3f}"
-    duracao_str = f"{duracao_alvo_segundos:.3f}"
-
-    if preciso:
-        cmd_cut = [
-            'ffmpeg',
-            '-i', input_path,
-            '-ss', inicio_str,
-            '-t', duracao_str,
-            '-c:v', 'libx264',
-            '-c:a', 'aac',
-            '-y', output_path_corte
-        ]
-    else:
-        cmd_cut = [
-            'ffmpeg',
-            '-ss', inicio_str,
-            '-i', input_path,
-            '-t', duracao_str,
-            '-c', 'copy',
-            '-y', output_path_corte
-        ]
-
-    try:
-        print(f"Recortando {input_path} [{inicio_str}s por {duracao_str}s] -> {output_path_corte}...")
-        subprocess.run(cmd_cut, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8')
-        print(f"Clipe recortado salvo em: {output_path_corte}")
-        return output_path_corte
-    except subprocess.CalledProcessError as e:
-        print(f"Erro ao recortar {input_path}:")
-        print("Comando:", " ".join(e.cmd))
-        print("Output (stdout):", e.stdout or "N/A")
-        print("Erro (stderr):", e.stderr or "N/A")
-        if os.path.exists(output_path_corte):
-            try: os.remove(output_path_corte)
-            except OSError: pass
-        return None """
 
 def recortar_clip(input_path, output_path_corte, duracao_alvo_segundos, inicio_segundos=0.0,
                   preciso=True, fps_padrao=30):
@@ -1050,7 +983,7 @@ def padronizar_clip(input_path, output_path, duracao_clip=None,
             output_path
         ])
 
-        print(f"Executando FFmpeg para padronização com texto/imagem: {' '.join(cmd_standardize)}")
+        print(f"Executando FFmpeg para padronização com texto/imagem: {' '.join(str(cmd_standardize))}")
         subprocess.run(cmd_standardize, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8')
         print(f"Clipe final padronizado salvo em: {output_path}")
         return output_path
@@ -1188,16 +1121,6 @@ def concatenar_clips_com_narracao(lista_info_clips, caminho_narracao, output_pat
             except OSError as e:
                 print(f"Aviso: não foi possível remover o arquivo de vídeo concatenado temporário {temp_concatenated_video_path}: {e}")
 
-
-
-
-
-
-
-
-
-
-
 def ordenar_json_por_inicio(caminho_entrada, caminho_saida=None):
     with open(caminho_entrada, 'r', encoding='utf-8') as f:
         dados = json.load(f)
@@ -1211,10 +1134,6 @@ def ordenar_json_por_inicio(caminho_entrada, caminho_saida=None):
         json.dump(dados_ordenados, f, ensure_ascii=False, indent=2)
 
     print(f"Arquivo ordenado salvo em: {caminho_saida}")
-
-
-
-
 
 
 def get_audio_duration_1(audio_path):
@@ -1379,10 +1298,6 @@ def adicionar_camadas_ao_video_base(
         print("Comando:", e.cmd)
         print("Output:", e.stdout)
         print("Error:", e.stderr)
-
-
-
-
 
 import json
 import subprocess
@@ -1584,7 +1499,7 @@ def gif_to_mp4(input_path, output_path=None):
 # Exemplo de uso
 def main():
     print("Carregando imagens e metadados...")
-    gif_to_mp4(BASE_DIR / "assets" / "topics_video" / "videos" / "possiveis_intro.gif")
+    gif_to_mp4(BASE_DIR / "assets" / "topics_video" / "videos" / "transition_video.gif")
     image_data = []
     for filename in sorted(os.listdir(PROCESSED_DIR)):
         base, ext = os.path.splitext(filename)
@@ -1682,7 +1597,7 @@ def main():
         }]
 
         clip_padronizado = padronizar_clip(
-            input_path=BASE_DIR / "assets" / "topics_video" / "videos" / "possiveis_intro.mp4",
+            input_path=BASE_DIR / "assets" / "topics_video" / "videos" / "transition_video.mp4",
             output_path=path_video_editado,
             duracao_clip=intervalo_duracao,
             fade_in=False,
@@ -1780,21 +1695,21 @@ def main():
     # --- RENDER ---
 
     with open(BASE_DIR / "data" / "topics_video" / "final_list_render.json", "w", encoding="utf-8") as f:
-        json.dump(clips, f, ensure_ascii=False, indent=2)
+        json.dump(clips, f, ensure_ascii=False, indent=2, default=str)
 
     ordenar_json_por_inicio(BASE_DIR / "data" / "topics_video" / "final_list_render.json", BASE_DIR / "data" / "topics_video" / "final_list_render.json")
 
     lista_com_lacunas_preenchidas = preencher_lacunas_temporais(BASE_DIR / "data" / "topics_video" / "final_list_render.json")
 
     with open(BASE_DIR / "data" / "topics_video" / "dados_video_corrigido.json", "w", encoding="utf-8") as f_out:
-        json.dump(lista_com_lacunas_preenchidas, f_out, indent=2, ensure_ascii=False)
+        json.dump(lista_com_lacunas_preenchidas, f_out, indent=2, ensure_ascii=False, default=str)
 
     print("\nResultado salvo em 'dados_video_corrigido.json'")
 
     with open(BASE_DIR / "data" / "topics_video" / "dados_video_corrigido.json", 'r', encoding="utf-8") as f:
         intervalos_final_list = json.load(f)
 
-    concatenar_clips_com_narracao(intervalos_final_list, AUDIO_FINAL_FILE_PATH, BASE_DIR / "data" / "topics_video" / "videos" / "output" / "end_video.mp4")
+    concatenar_clips_com_narracao(intervalos_final_list, str(AUDIO_FINAL_FILE_PATH), str(BASE_DIR / "assets" / "topics_video" / "videos" / "output" / "end_video.mp4"))
     #concatenar_clips_com_narracao(intervalos_final_list, NARRACAO_AUDIO_FILE, "C:/Users/souza/Videos/VideoCreator/end_video.mp4") #sem audio de fundo
 
 

@@ -3,12 +3,13 @@ import json
 import os
 import shutil
 import time
-from pathlib import Path
 
 import unicodedata
 import uuid  # Para gerar nomes únicos para o backup
 
 from automated_video_generator.config import BASE_DIR
+from automated_video_generator.utils.clear_directories import clear_directories
+
 
 def remover_acentos(texto):
     remover = "´^~\"'"  # Adiciona aspas duplas (") e simples (')
@@ -94,27 +95,6 @@ def deletar_arquivo_downloads(nome_arquivo):
     except Exception as e:
         print(f"Ocorreu um erro ao deletar o arquivo: {e}")
 
-
-def limpar_apenas_imagens_recursivo(pasta):
-    # Extensões que queremos apagar
-    extensoes_para_deletar = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.json'}
-
-    caminho_base = Path(pasta)
-
-    # rglob("*") percorre a pasta e TODAS as subpastas
-    for item in caminho_base.rglob("*"):
-        # Só deleta se:
-        # 1. For um arquivo
-        # 2. A extensão estiver na lista
-        # 3. O nome NÃO for __init__.py (proteção extra)
-        if item.is_file() and item.suffix.lower() in extensoes_para_deletar:
-            if item.name != "__init__.py":
-                item.unlink()
-                print(f"Arquivo deletado: {item.name}")
-
-    print(f"✅ Limpeza concluída em {pasta}. Estrutura de pastas e arquivos .py preservada.")
-
-
 def verificar_arquivo_e_string(nome_arquivo, string_procurada):
     pasta_downloads = BASE_DIR / "data" / "topics_video"
     caminho_arquivo = os.path.join(pasta_downloads, nome_arquivo)
@@ -155,7 +135,7 @@ def main():
         termos_chaves = json.load(f)
 
     pasta_para_limpar = BASE_DIR / "assets" / "topics_video" / "imagens"
-    limpar_apenas_imagens_recursivo(pasta_para_limpar)
+    clear_directories(pasta_para_limpar)
 
     for topico_intervalo in termos_chaves:
         for images in topico_intervalo["imagens"]:
