@@ -165,3 +165,76 @@ O windows tem que ter o FFMPEG:
 
 "winget install ffmpeg" (Powershell)
 
+
+
+
+
+Se você rodou:
+
+pip install .
+
+
+Sem -e, ele não está em modo editable.
+
+Ou seja:
+
+o código foi copiado pra site-packages
+
+mudanças no seu diretório não refletem no pacote instalado
+
+Dentro da venv, pra dev, o ideal é:
+
+"pip install -e ."
+
+
+
+
+
+
+Scripts .ps1:
+
+
+- teclado tem que está em ABNT2
+
+- No browser pode dar o Alerta:
+
+"Alerta antifraude: Tome cuidado ao colar coisas que você não entende.... (Só digitar "permitir colar" no console do browser)
+
+
+
+Erro em PROCESSAR IMAGENS SCRIPT: NOME DA IMAGEM MUITO GRANDE
+
+
+
+step-by-step
+passo-a-passo:
+
+- py -3.10 -m venv .venv
+- .venv\Scripts\Activate.ps1
+- python -m pip install --upgrade pip
+- python.exe -m pip install .
+- python -m spacy download en_core_web_md
+- automated_video_generator
+
+
+modo ideal:
+
+- pip install -r requirements.txt (para instalar libs)
+- pip freeze > requirements.txt (lista TUDO o que está na venv)
+
+# Ex de requirements.txt:
+
+(
+PySide6==6.6.1
+Pillow==10.2.0
+)
+
+
+
+EXECUÇÃO FINAL ATUAL:
+
+Para executar codigo python
+
+- cd src (pois o python não enxerga a src (não tem __init__.py))
+- python -m automated_video_generator.cli
+

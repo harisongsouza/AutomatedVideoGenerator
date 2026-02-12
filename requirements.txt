@@ -1,0 +1,11 @@
+pyside6
+edge_tts
+faster_whisper
+rapidfuzz
+thefuzz
+typer
+deep_translator
+spacy
+opencv-python
+pillow
+pydub

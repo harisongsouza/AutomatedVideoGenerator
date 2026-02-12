@@ -204,8 +204,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-#/src/automated_video_generator/assets/
 *.mp4
 *.wav
 *.mp3
+*.webm
 
