@@ -11,7 +11,7 @@ uv add automated-video-generator
 Or if you prefer to use `pip`:
 
 ```sh
-pip install automated-video-generator
+pip install automated_video_generator
 ```
 
 ## From source

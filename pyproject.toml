@@ -14,7 +14,17 @@ classifiers = [
 ]
 license = {text = "MIT"}
 dependencies = [
-  "typer"
+    "pyside6",
+    "edge_tts",
+    "faster_whisper",
+    "rapidfuzz",
+    "thefuzz",
+    "typer",
+    "deep_translator",
+    "spacy",
+    "opencv-python",
+    "pillow",
+    "pydub"
 ]
 requires-python = ">= 3.10"
 
@@ -55,3 +65,6 @@ select = [
 
 [tool.uv]
 package = true
+
+[tool.setuptools.package-data]
+"*" = ["*.xml", "*.txt", "*.json", "*.ps1"]

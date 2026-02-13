@@ -1,0 +1,245 @@
+
+nome_do_projeto/
+├── .venv/
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml
+├── docs/
+├── src/
+│   └── nome_do_pacote/
+│       ├── __init__.py
+│       ├── modulo1.py
+│       └── modulo2.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_modulo1.py
+│   └── test_modulo2.py
+├── .gitignore
+├── pyproject.toml
+├── README.md
+
+
+pyproject.toml: O coração da configuração moderna do projeto Python. Este arquivo substitui os antigos setup.py, requirements.txt e setup.cfg. Ele é usado para gerenciar dependências, definir a build do pacote, e configurar ferramentas de linting e formatação.
+
+
+
+pyproject.toml
+
+[tool.poetry]
+name = "nome_do_projeto"
+version = "0.1.0"
+description = "Uma breve descrição do seu projeto."
+authors = ["Seu Nome <seu.email@example.com>"]
+readme = "README.md"
+packages = [{include = "nome_do_pacote", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+black = "^23.7.0"
+ruff = "^0.0.285"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+
+--Inicializar projeto
+
+- Cookiecutter (o mais parecido com Spring Initializr)
+
+-Instalar:
+
+pip install --user pipx
+pipx install cookiecutter
+
+-Um dos templates mais usados no mundo é (👉 Gera exatamente o que você descreveu e tem como template preferido):
+
+ "cookiecutter https://github.com/audreyfeldroy/cookiecutter-pypackage"
+
+
+-.venv
+
+É criada depois que o projeto existe: python -m venv .venv
+
+(em seguida ativa "source .venv/bin/activate"(linux) ".venv\Scripts\Activate.ps1"(win))
+
+(para sair da venv "deactivate")
+
+(Instale com 'pip install -e .')
+
+
+
+
+
+
+
+
+
+
+Mas se eu PRECISAR do requirements.txt?
+
+pip freeze > requirements.txt (para gerar o arquivo com as libs do projeto 'de forma congelada, versão == inves de >=')
+
+E para instalar depois:
+
+pip install -r requirements.txt
+
+(isso é legado, hoje usamos o pyproject.toml)
+
+
+
+instalar tudo do pyproject.toml:
+
+"pip install ." (instala tudo do arquivo)
+
+ou
+
+"pip install -e ." (se for so dependencias)
+
+
+para colocar dependencias do projeto no pyproject.poml:
+
+pip install pipreqs
+pipreqs .
+
+Isso analisa os imports e gera um requirements.txt só com as diretas.
+Aí você copia para o pyproject.toml.
+
+
+ou
+
+pip freeze > requirements.txt (e coloca as dependencias no pyproject.toml)
+
+
+
+
+
+
+*PRECISA SEMPRE/ A CADA ALTERAÇÃO NO CODIGO EXECUTAR A SEQUENCIA:
+- pip install .
+- automated_video_generator
+*
+
+
+
+
+dependencias:
+
+PySide6
+edge_tts
+faster_whisper
+rapidfuzz
+thefuzz
+spacy
+
+
+
+CRIAR VM: "py -3.11 -m venv .venv"
+
+Por que usar o py em vez de python?
+No Windows, o comando py chama o Python Launcher. Ele é ótimo porque permite que você escolha qual versão rodar sem conflitos:
+Para rodar o 3.11: py -3.11 seu_script.py
+Para rodar o 3.14: py -3.14 seu_script.py
+
+
+Erro de spacy/thinc/numpy:
+
+ERRO: "python -m spacy download en_core_web_md"
+
+baixe: VC_redist.x64
+https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
+Esse erro acontece porque o spaCy e o seu motor de redes neurais, o Thinc, possuem partes escritas em linguagens de baixo nível (como C e C++) para serem ultravelozes.
+No Windows, esses módulos não conseguem rodar sozinhos; eles precisam de "ajudantes" chamados bibliotecas de tempo de execução (Runtime).
+
+
+
+O windows tem que ter o FFMPEG:
+
+"winget install ffmpeg" (Powershell)
+
+
+
+
+
+Se você rodou:
+
+pip install .
+
+
+Sem -e, ele não está em modo editable.
+
+Ou seja:
+
+o código foi copiado pra site-packages
+
+mudanças no seu diretório não refletem no pacote instalado
+
+Dentro da venv, pra dev, o ideal é:
+
+"pip install -e ."
+
+
+
+
+
+
+Scripts .ps1:
+
+
+- teclado tem que está em ABNT2
+
+- No browser pode dar o Alerta:
+
+"Alerta antifraude: Tome cuidado ao colar coisas que você não entende.... (Só digitar "permitir colar" no console do browser)
+
+
+
+Erro em PROCESSAR IMAGENS SCRIPT: NOME DA IMAGEM MUITO GRANDE
+
+
+
+step-by-step
+passo-a-passo:
+
+- py -3.10 -m venv .venv
+- .venv\Scripts\Activate.ps1
+- python -m pip install --upgrade pip
+- python.exe -m pip install .
+- python -m spacy download en_core_web_md
+- automated_video_generator
+
+
+modo ideal:
+
+- pip install -r requirements.txt (para instalar libs)
+- pip freeze > requirements.txt (lista TUDO o que está na venv)
+
+# Ex de requirements.txt:
+
+(
+PySide6==6.6.1
+Pillow==10.2.0
+)
+
+
+
+EXECUÇÃO FINAL ATUAL:
+
+Para executar codigo python
+
+- cd src (pois o python não enxerga a src (não tem __init__.py))
+- python -m automated_video_generator.cli
+
+
+
+
+
+Você precisa ter o ffmpeg instalado no sistema. (para converter .gif para .mp4)
