@@ -41,13 +41,11 @@ if not os.path.exists(HAAR_CASCADE_PATH):
 face_cascade = cv2.CascadeClassifier(HAAR_CASCADE_PATH)
 
 def encontrar_objeto_por_path(img_path, arquivo_img_interv):
-    # 1. Normaliza o caminho buscado (transforma tudo para o padrão do sistema atual)
-    # Isso faz com que "C:/Pasta/Foto.jpg" seja igual a "C:\\Pasta\\Foto.jpg"
+    # 1. Normaliza o caminho buscado
     path_buscado_norm = os.path.normpath(img_path.strip())
 
     # 2. Varre cada objeto principal (cada cena/tópico)
     for objeto_pai in arquivo_img_interv:
-        # Pega a lista de imagens, se não existir retorna lista vazia para não dar erro
         lista_imagens = objeto_pai.get("imagens", [])
 
         # 3. Varre as imagens dentro desse objeto
@@ -55,15 +53,14 @@ def encontrar_objeto_por_path(img_path, arquivo_img_interv):
             path_imagem_json = imagem.get("path")
 
             if path_imagem_json:
-                # Normaliza o caminho que está no JSON também
+                # Normaliza o caminho que está no JSON
                 path_json_norm = os.path.normpath(path_imagem_json.strip())
 
-                # 4. Compara os caminhos normalizados
-                if path_buscado_norm == path_json_norm:
-                    # ACHOU! Retorna o objeto pai inteiro conforme você pediu
-                    return objeto_pai
+                # 4. Compara os caminhos
+                if path_buscado_norm.lower() == path_json_norm.lower():
+                    # AJUSTE AQUI: Retorna apenas o dicionário da imagem, não o pai
+                    return imagem
 
-    # Se varreu tudo e não achou
     return None
 
 # --- Funções Auxiliares (mantidas sem alterações) ---
